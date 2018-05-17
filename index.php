@@ -56,7 +56,7 @@
 			</div>
 			<h2>¿Cómo funciona?</h2>
 			<h3>CREÁ:</h3>
-			<p>Creá un juego divertido para aprender en minutos, creando preguntas con respuestas múltiple choice.</p>
+			<p>Creá en minutos un juego divertido para que aprendan de forma divertida, creando preguntas con respuestas de opciones múltiples.</p>
 			<p>El formato y el número de las preguntas dependerá de vos. También podés agregar imágenes, videos y diagramas.</p>
 			<h3>JUGÁ:</h3>
 			<p>Participá de juegos en grupo, respondiendo a preguntas en tu propio dispositivo.</p>
