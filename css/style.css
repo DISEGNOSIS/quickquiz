@@ -426,6 +426,10 @@ footer {
 	.formulario #registro label {
 		flex: 0.15;
 	}
+	
+	.formulario #ingreso label {
+		flex: 0.13;
+	}
 
 }
 
@@ -499,6 +503,10 @@ footer {
 	.formulario #registro label {
 		flex: 0.25;
 	}
+	
+	.formulario #ingreso label {
+		flex: 0.14;
+	}
 
 }
 
@@ -514,6 +522,10 @@ footer {
 	
 	.formulario #registro label {
 		flex: 0.32;
+	}
+	
+	.formulario #ingreso label {
+		flex: 0.16;
 	}
 
 }

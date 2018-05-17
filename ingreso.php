@@ -47,7 +47,7 @@
  	<section>
  		<h1 class="ingreso">Ingreso a tu cuenta:</h1>
 		<article class="formulario">
-			<form action="" method="post">
+			<form action="" method="post" id="ingreso">
  				<div class="campo">
  					<label for="usuario">Usuario: </label>
 					<input type="text" name="usuario" value="">
