@@ -48,7 +48,7 @@
 		<article>
 			<h1 class="ayuda">Ayuda</h1>
 			<h4>¿Cómo juego?</h4>
-			<p>Para participar de los juegos, pedí el código de juego a quien te invitó a participar e ingresalo <a href="jugar.php">acá</a>. Si querés crear un nuevo juego, deberás <a href="registro.php">registrarte acá</a>.</p>
+			<p>Para participar de los juegos, pedí el código de juego a quien te invitó a participar e <a href="jugar.php">ingresalo acá</a>. Si querés crear un nuevo juego, deberás <a href="registro.php">registrarte acá</a>.</p>
 			<h4>¿Tengo que registrarme para jugar?</h4>
 			<p>No es necesario que te registres. Podés jugar ingresando como invitad@.</p>
 			<h4>¿Qué beneficios tengo por registrarme?</h4>
