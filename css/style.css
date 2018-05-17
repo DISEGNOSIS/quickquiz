@@ -142,7 +142,7 @@ h4:first-of-type {
 }
 
 h4:nth-of-type(2) {
-	color: #f15a24;
+	color: #d11919;
 }
 
 h4:nth-of-type(3) {
@@ -151,6 +151,10 @@ h4:nth-of-type(3) {
 
 h4:nth-of-type(4) {
 	color:  #93278f;
+}
+
+h4:last-of-type {
+	color: #f15a24;
 }
 
 p {

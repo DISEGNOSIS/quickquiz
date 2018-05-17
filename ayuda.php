@@ -55,6 +55,8 @@
 			<p>Si te registrás, podés crear juegos de preguntas y respuestas e invitar a quien quieras a participar. Este juego queda guardado y podés utilizarlo con distintos grupos de alumnos o participantes.</p>
 			<h4>¿Cómo me registro?</h4>
 			<p><a href="registro.php">Ingresá a la página de registro</a> y completa sólo unos datos mínimos.</p>
+			<h4>¿Existe un máximo de juegos en los que pueda participar?</h4>
+			<p>No existe un límite de juegos en los que participes. Podés participar de todos los que quieras siempre que tengas el código de juego!</p>
 		</article>
  	</section>
  </main>
