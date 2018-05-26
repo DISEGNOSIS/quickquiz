@@ -100,7 +100,9 @@ h1 {
 }
 
 .principal {
-	font-family: 'Parisienne', cursive;
+/*cambio el font para probar-Mariela
+	font-family: 'Parisienne', cursive;*/
+	font-family: 'Indie Flower', cursive;
 	text-align: center;
 	font-size: 2.6em;
 	color: #0071bc;

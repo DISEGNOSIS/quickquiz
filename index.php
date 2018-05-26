@@ -9,6 +9,8 @@
 	<link rel="stylesheet" href="fonts/css/fontawesome-all.css">
 	<link href="https://fonts.googleapis.com/css?family=Parisienne|Rambla" rel="stylesheet"> 
 	<link rel="icon" href="img/favicon.png" type="image/x-icon">
+<!--agrego un font de prueba-Mariela-->
+	<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
   <!--[if lt IE 9]>
   	<script src="js/html5shiv.js"></script>
 	<![endif]-->
