@@ -49,23 +49,23 @@
 		<article class="formulario">
 			<form action="" method="post" id="registro">
  				<div class="campo">
- 					<label for="usuario">Usuario: </label>
+ 					<label for="usuario">Usuario*: </label>
 					<input type="text" name="usuario" value="">
  				</div>
  				<div class="campo">
- 					<label for="email">e-Mail: </label>
+ 					<label for="email">e-Mail*: </label>
 					<input type="email" name="email" value="">
  				</div>
  				<div class="campo">
- 					<label for="email-confirm">Confirmar e-Mail: </label>
+ 					<label for="email-confirm">Confirmar e-Mail*: </label>
 					<input type="email" name="email-confirm" value="">
  				</div>
  				<div class="campo">
- 					<label for="password">Contraseña: </label>
+ 					<label for="password">Contraseña*: </label>
 					<input type="password" name="password" value="">
  				</div>
  				<div class="campo">
- 					<label for="password-confirm">Confirmar Contraseña: </label>
+ 					<label for="password-confirm">Confirmar Contraseña*: </label>
 					<input type="password" name="password-confirm" value="">
  				</div>
 				<div class="campo">
