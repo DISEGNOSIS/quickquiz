@@ -1,5 +1,5 @@
 <?php
-session_start(); 
+
 include_once("functions.php");
 
 if ($_POST) {
@@ -41,7 +41,7 @@ if ($_POST) {
 		guardarUsuario($usuario);
 			//session_start(); 
 	    	$_SESSION['user']= $_POST["usuario"];
-	    	header("Location: /inscripto.php");
+	    	header("Location: inscripto.php");
 	    	//echo "<script>location.href='inscripto.php';</script>";
 	    	//exit;
 	}

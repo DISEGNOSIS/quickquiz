@@ -1,5 +1,4 @@
 <?php
-session_start(); 
 	require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
 
 	 
