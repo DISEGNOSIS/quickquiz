@@ -4,30 +4,40 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>QuickQuiz - Ayuda.</title>
+	<title>QuickQuiz - Juegos para el aprendizaje.</title>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="fonts/css/fontawesome-all.css">
 	<link href="https://fonts.googleapis.com/css?family=Parisienne|Rambla" rel="stylesheet"> 
 	<link rel="icon" href="img/favicon.png" type="image/x-icon">
+<!--agrego un font de prueba-Mariela-->
+	<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
   <!--[if lt IE 9]>
   	<script src="js/html5shiv.js"></script>
 	<![endif]-->
 </head>
 <body>
 	<?php
+
+		//session_start();
 		require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
+
 		$user = userLogueado(); 
-		if ($user==false) {
+		if($user==false){
+			header("Location: ingreso.php");
 			$php2="ingreso.php"; 
 			$php3="registro.php"; 
 			$etiqueta2= "Ingresá"; 
 			$etiqueta3= "Registrate"; 
-		}else{
+
+		} else {
 			$php2="salida.php"; 
-			$php3="Bienvenida.php"; 
-			$etiqueta2= "Salí"; 
+			$php3="perfil.php"; 
+			$etiqueta2= "SALÍ"; 
 			$etiqueta3= $user; 
+						
 		}
+
+
 	?>
  <header>
  	<div class="fila">
@@ -38,7 +48,7 @@
 		</div>
 		<nav class="top">
 			<ul>
-			<li><a href="jugar.php">Jugá</a></li>
+			<li><a href="jugar.php">JUGÁ</a></li>
 			 <li><a href="<?php echo $php2?>"><?php echo $etiqueta2?></a></li>
 			 <li><a href="<?php echo $php3?>"><?php echo $etiqueta3?></a></li>
 			</ul>
@@ -51,27 +61,22 @@
 	 </a>
 	 <nav class="main-nav">
 		 <ul>
-		 	<li><a href="index.php">Inicio</a></li>
+		 	<li class="activo"><a href="index.php">Inicio</a></li>
 			 <li><a href="como-jugar.php">¿Cómo se juega?</a></li>
 			 <li><a href="reglas.php">Reglas</li>
-			 <li class="activo"><a href="ayuda.php">Ayuda</a></li>
+			 <li><a href="ayuda.php">Ayuda</a></li>
 		 </ul>
 	 </nav>
 	</header>
- <main>
+ <main style="width: 50%">
  	<section>
 		<article>
-			<h1 class="ayuda">Ayuda</h1>
-			<h4>¿Cómo juego?</h4>
-			<p>Para participar de los juegos, pedí el código de juego a quien te invitó a participar e <a href="jugar.php">ingresalo acá</a>. Si querés crear un nuevo juego, deberás <a href="registro.php">registrarte acá</a>.</p>
-			<h4>¿Tengo que registrarme para jugar?</h4>
-			<p>No es necesario que te registres. Podés jugar ingresando como invitad@.</p>
-			<h4>¿Qué beneficios tengo por registrarme?</h4>
-			<p>Si te registrás, podés crear juegos de preguntas y respuestas e invitar a quien quieras a participar. Este juego queda guardado y podés utilizarlo con distintos grupos de alumnos o participantes.</p>
-			<h4>¿Cómo me registro?</h4>
-			<p><a href="registro.php">Ingresá a la página de registro</a> y completa sólo unos datos mínimos.</p>
-			<h4>¿Existe un máximo de juegos en los que pueda participar?</h4>
-			<p>No existe un límite de juegos en los que participes. Podés participar de todos los que quieras siempre que tengas el código de juego!</p>
+			<h1 class="principal">¡Hola  <?php echo $etiqueta3?>!</h1>
+			<div class="izq" style="width: 150px">
+				<img src= "avatar/<?php  echo $_SESSION["avatar"]?>" alt="Tu Avatar" width= 50% style= "border-radius: 50%">
+			</div>
+			<p>Gracias por regresar a <strong>QuickQuiz</strong>. <br>Ya podés comenzar a jugar y/o preparar tus juegos de preguntas y respuestas.</p>
+
 		</article>
  	</section>
  </main>

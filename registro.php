@@ -1,3 +1,57 @@
+<?php
+session_start(); 
+include_once("functions.php");
+
+if ($_POST) {
+
+  $original = $_FILES["avatar"];
+
+  if ($original["error"] === UPLOAD_ERR_OK) { //UPLOAD_ERR_OK es equivalente a 0
+
+    $nombreViejo = $original["name"]; // Nombre original del archivo
+
+    $extension = pathinfo($nombreViejo, PATHINFO_EXTENSION); // Extensión del archivo subido
+
+    $nombreNuevo = $original["tmp_name"]; // Nombre temporal en el servidor
+
+    $archivoFinal = dirname(__FILE__); // Agarramos el archivo donde estamos parados ahora mismo
+
+    /*$archivoFinal .= "/avatar/"; // .= nos permite concatenar, en este caso es lo mismo que poner $archivoFinal = $archivoFinal . "/img/"
+
+    $archivoFinal .= uniqid() . "." . $extension; // uniqid genera un ID "único" para la foto*/
+
+    $nomDir = "/avatar/";
+
+    $nomAvatar =  uniqid() . "." . $extension;
+   /*var_dump($nombreNuevo, $archivoFinal);exit;*/
+
+   $archivoFinal .= $nomDir . $nomAvatar;
+
+    move_uploaded_file($nombreNuevo, $archivoFinal); // avatar/5b233684235a4.jpg movemos el archivo a la ubicación final
+   }
+  $_POST["avatar"] = $nomAvatar;
+  /*var_dump($_POST);*/
+}
+
+if ($_POST) {
+	$errores = validarDatos($_POST);
+	if(empty($errores)){
+		$usuario = crearUsuario($_POST);
+//		var_dump($usuario);
+		guardarUsuario($usuario);
+			//session_start(); 
+	    	$_SESSION['user']= $_POST["usuario"];
+	    	header("Location: /inscripto.php");
+	    	//echo "<script>location.href='inscripto.php';</script>";
+	    	//exit;
+	}
+}
+
+
+    
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -23,9 +77,9 @@
 		</div>
 		<nav class="top">
 			<ul>
-			<li><a href="jugar.php">Jugá</a></li>
-			 <li><a href="ingreso.php">Ingresá</a></li>
-			 <li class="activo"><a href="registro.php">Registrate</a></li>
+			<li><a href="jugar.php">JUGÁ</a></li>
+			 <li><a href="ingreso.php">INGRESÁ</a></li>
+			 <li class="activo"><a href="registro.php">REGISTRATE</a></li>
 			</ul>
 		</nav>
 	 </div>
@@ -47,34 +101,73 @@
  	<section>
  		<h1 class="registro">Registrate:</h1>
 		<article class="formulario">
-			<form action="" method="post" id="registro">
+			<form action="" method="post" id="registro" enctype="multipart/form-data">
+
+
+ 				
  				<div class="campo">
  					<label for="usuario">Usuario*: </label>
-					<input type="text" name="usuario" value="">
- 				</div>
+					<input type="text" name="usuario" value= "<?php
+					 if ($_POST && $_POST["usuario"] !== "") {
+					 	echo $_POST["usuario"];
+					 }else echo "";
+					 ?>">
+				</div>
+				<div class="error">
+					<span ><?php echo isset($errores["usuario"])? $errores["usuario"]: "";?> </span>
+                </div>
+ 				
  				<div class="campo">
  					<label for="email">e-Mail*: </label>
-					<input type="email" name="email" value="">
+					<input type="email" name="email" value="<?php
+					 if ($_POST && $_POST["email"] !== "") {
+					 	echo $_POST["email"];
+					 }else echo "";
+					 ?>">
+				</div>
+ 				<div class="error">
+ 					<span  class='error'><?php echo isset($errores["email"])? $errores["email"]:"";?> </span>
  				</div>
+ 				
  				<div class="campo">
- 					<label for="email-confirm">Confirmar e-Mail*: </label>
-					<input type="email" name="email-confirm" value="">
+ 					<label for="email_confirm">Confirmá tu e-Mail*: </label>
+					<input type="email" name="email_confirm" value="<?php
+					 if ($_POST && $_POST["email_confirm"] !== "") {
+					 	echo $_POST["email_confirm"];
+					 }else echo "";
+					 ?>">
  				</div>
+ 				<div class="error">
+ 					<span  class='error'><?php echo isset($errores["email_confirm"])? $errores["email_confirm"]:"";?> </span>
+ 				</div>
+ 				
  				<div class="campo">
  					<label for="password">Contraseña*: </label>
 					<input type="password" name="password" value="">
- 				</div>
+	  			</div>
+ 				<div  class="error" style='clear:both'><?php echo isset($errores["password"])? $errores["password"]:"";?> </div>
+ 				
  				<div class="campo">
- 					<label for="password-confirm">Confirmar Contraseña*: </label>
+ 					<label for="password-confirm">Confirmá tu Contraseña*: </label>
 					<input type="password" name="password-confirm" value="">
+				</div>
+ 				<div  class="error" style='clear:both'><?php echo isset($errores["password-confirm"])? $errores["password-confirm"]:"";?> </div>
+
+ 				<div class="campo">
+ 					<label for="avatar">Elegí tu avatar: </label>
+					<input type="file" name="avatar" value="">
+					
  				</div>
+
+
 				<div class="campo">
 					<button type="submit" form="registro" value="registrarme">Registrarme</button>
 				</div>
  			</form>
  			<div class="campo">
-				<p><em>*&nbsp; Todos los campos son requeridos.</em></p>
+				<p><em>*&nbsp; Campos requeridos.</em></p>
 			</div>
+
  		</article>
  	</section>
  </main>

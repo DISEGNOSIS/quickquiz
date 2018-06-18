@@ -16,6 +16,21 @@
 	<![endif]-->
 </head>
 <body>
+	<?php
+		require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
+		$user = userLogueado(); 
+		if ($user==false) {
+			$php2="ingreso.php"; 
+			$php3="registro.php"; 
+			$etiqueta2= "Ingresá"; 
+			$etiqueta3= "Registrate"; 
+		}else{
+			$php2="salida.php"; 
+			$php3="Bienvenida.php"; 
+			$etiqueta2= "SALÍ"; 
+			$etiqueta3= "¡Hola " . $user ."!"; 
+		}
+	?>
  <header>
  	<div class="fila">
 		<div id="logo">
@@ -25,9 +40,9 @@
 		</div>
 		<nav class="top">
 			<ul>
-			<li><a href="jugar.php">Jugá</a></li>
-			 <li><a href="ingreso.php">Ingresá</a></li>
-			 <li><a href="registro.php">Registrate</a></li>
+			 <li><a href="jugar.php">JUGÁ</a></li>
+			 <li><a href="<?php echo $php2?>"><?php echo $etiqueta2?></a></li>
+			 <li><a href="<?php echo $php3?>"><?php echo $etiqueta3?></a></li>
 			</ul>
 		</nav>
 	 </div>
@@ -49,18 +64,18 @@
  	<section>
 		<article>
 			<h1 class="principal">Juegos para el Aprendizaje</h1>
-			<p><strong>QuickQuiz</strong> es una plataforma para realizar juegos de preguntas y respuestas.</p>
-			<p>Es ideal para maestros, pero también pueden utilizarla todos aquellos que quieran enseñar y que sus alumnos o aprendices <strong>aprendan jugando!</strong></p>
+			<p><strong>QuickQuiz</strong> es una plataforma para realizar juegos, actividades o desafíos de preguntas y respuestas.</p>
+			<p>Es ideal para maestros, pero también pueden utilizarla todos aquellos que quieran enseñar emplear un método práctico y divertido para fijar conocimientos.<br>Asimismo constituye una herramienta de esparcimiento para cualquier edad y con objetivos diversos.</p>
 			</article>
 			<article>
 			<div class="izq">
 				<img src="img/quickquiz-juego-aprender-online.jpg" alt="QuickQuiz juego para aprender online">
 			</div>
 			<h2>¿Cómo funciona?</h2>
-			<h3>CREÁ:</h3>
-			<p>Creá en minutos un juego divertido para que aprendan de forma divertida, creando preguntas con respuestas de opciones múltiples.</p>
-			<p>El formato y el número de las preguntas dependerá de vos. También podés agregar imágenes, videos y diagramas.</p>
-			<h3>JUGÁ:</h3>
+			<h3>CREAR:</h3>
+			<p>Creá en minutos un juego divertido para el aprendizaje, generando preguntas con respuestas de opciones múltiples.</p>
+			<p>El formato y el número de las preguntas dependerá de vos. También podés agregar imágenes, videos y diagramas como forma de respuesta.</p>
+			<h3>JUGAR:</h3>
 			<p>Participá de juegos en grupo, respondiendo a preguntas en tu propio dispositivo.</p>
 		</article>
  	</section>

@@ -1,3 +1,62 @@
+<?php
+session_start(); 
+	require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
+
+	 
+
+	if(isset($_COOKIE["userQQ"])){
+		$usuario = $_COOKIE["userQQ"];
+		$password = "";		
+		$recordar = "checked";	
+	} else {
+		$usuario = "";
+		$password = "";		
+		$recordar = ""; 
+	}; 
+
+
+    $loginInvalido = false;
+
+	if ($_POST) {
+//echo "<br> entra al post";
+//		var_dump($_POST); 
+		$usuario = $_POST['usuario'];
+		$password = $_POST['password'];
+		if (isset($_POST['recordarme'])) {
+			$recordar = "checked";	
+			$cookie_name = "userQQ"; 
+			$cookie_value = $usuario; 
+			setcookie($cookie_name, $cookie_value); 
+//			$cookie_name = "passQQ"; 
+//			$cookie_value = $password; 
+//			setcookie($cookie_name, $cookie_value); 
+		}else {
+			$recordar = "";  
+		}
+	    
+	    $loginInvalido = validarLoginCompleto($_POST);
+
+	    if (empty($loginInvalido)) {
+		    /*echo "login completo";*/
+	    	$loginInvalido = validarLoginOK($_POST);
+    	/*echo "<br> antes de validar login";
+			var_dump($loginInvalido);*/
+		    if (empty($loginInvalido)) {
+
+    	/*echo "<br> DESPUES de validar login";*/
+			//session_start(); 
+	    	$_SESSION['user']= $usuario;
+	    	header('Location: bienvenida.php');
+	    }
+			
+     //}else {
+
+        //var_dump($loginInvalido);
+	    }
+	};
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -23,9 +82,9 @@
 		</div>
 		<nav class="top">
 			<ul>
-			<li><a href="jugar.php">Jugá</a></li>
-			 <li class="activo"><a href="ingreso.php">Ingresá</a></li>
-			 <li><a href="registro.php">Registrate</a></li>
+			<li><a href="jugar.php">JUGÁ</a></li>
+			 <li class="activo"><a href="ingreso.php">INGRESÁ</a></li>
+			 <li><a href="registro.php">REGISTRATE</a></li>
 			</ul>
 		</nav>
 	 </div>
@@ -45,20 +104,28 @@
 	</header>
  <main>
  	<section>
- 		<h1 class="ingreso">Ingreso a tu cuenta:</h1>
+ 		<h1 class="ingreso">Ingresá a tu cuenta:</h1>
 		<article class="formulario">
 			<form action="" method="post" id="ingreso">
  				<div class="campo">
  					<label for="usuario">Usuario: </label>
-					<input type="text" name="usuario" value="">
+					<input type="text" name="usuario" value="<?=$usuario?>">
  				</div>
- 				<div class="campo">
+ 				<div class="error">
+					<span ><?php echo isset($loginInvalido["usuario"])? $loginInvalido["usuario"]:"";?> </span>
+                </div>
+ 
+				<div class="campo">
  					<label for="password">Contraseña: </label>
-					<input type="password" name="password" value="">
- 				</div>
+					<input type="password" name="password" value="<?=$password?>">
+				</div>				
+ 				<div class="error">
+					<span ><?php echo isset($loginInvalido["password"])? $loginInvalido["password"]:"";?> </span>
+                </div>
+
  				<div class="campo1">
  					<div class="checkbox">
- 						<input type="checkbox" name="recordarme" value="recordar">Recordarme
+ 						<input type="checkbox" name="recordarme" value="recordar" <?=$recordar ?>>Recordarme
  					</div>
  					<a href="#">Olvidé mi Contraseña</a>
 				</div>
