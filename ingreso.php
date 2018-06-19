@@ -1,61 +1,63 @@
 <?php
 	require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
 
-	 
+	$user = userLogueado(); 
+	if($user){
+		header("Location: index.php");
 
-	if(isset($_COOKIE["userQQ"])){
-		$usuario = $_COOKIE["userQQ"];
-		$password = "";		
-		$recordar = "checked";	
 	} else {
+		$php2="bienvenida.php";
+		$php3="salida.php";
+		$etiqueta2= $user;
+		$etiqueta3= "Salí";							
+	}
+	
+	if(!isset($_COOKIE["userQQ"])){
 		$usuario = "";
 		$password = "";		
-		$recordar = ""; 
-	}; 
-
+		$recordar = "";
+	}
 
     $loginInvalido = false;
 
-	if ($_POST) {
+	if($_POST) {
 //echo "<br> entra al post";
 //		var_dump($_POST); 
 		$usuario = $_POST['usuario'];
 		$password = $_POST['password'];
-		if (isset($_POST['recordarme'])) {
-			$recordar = "checked";	
-			$cookie_name = "userQQ"; 
-			$cookie_value = $usuario; 
-			setcookie($cookie_name, $cookie_value); 
-//			$cookie_name = "passQQ"; 
-//			$cookie_value = $password; 
-//			setcookie($cookie_name, $cookie_value); 
-		}else {
-			$recordar = "";  
-		}
 	    
 	    $loginInvalido = validarLoginCompleto($_POST);
 
-	    if (empty($loginInvalido)) {
+	    if(empty($loginInvalido)) {
 		    /*echo "login completo";*/
 	    	$loginInvalido = validarLoginOK($_POST);
     	/*echo "<br> antes de validar login";
 			var_dump($loginInvalido);*/
-		    if (empty($loginInvalido)) {
 
-    	/*echo "<br> DESPUES de validar login";*/
-			//session_start(); 
-	    	$_SESSION['user']= $usuario;
-	    	header('Location: bienvenida.php');
-	    }
+			if (empty($loginInvalido)) {
+			/*echo "<br> DESPUES de validar login";*/
+				//session_start(); 
+				/* var_dump($_SESSION);
+          		exit(); */
+				header('Location: bienvenida.php');
+			}
 			
      //}else {
 
         //var_dump($loginInvalido);
-	    }
-	};
+		}
+		
+		if(isset($_POST['recordarme'])) {
+			$cookie_name = "userQQ"; 
+			$cookie_value = $usuario;
+			setcookie($cookie_name, $cookie_value, time()+2592000);
+			setcookie("avatar", $avatar, time()+2592000);
+			/* var_dump($_COOKIE);
+			exit(); */
+		}
 
+	}
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>

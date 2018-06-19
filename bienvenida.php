@@ -1,3 +1,19 @@
+<?php
+
+	//session_start();
+	require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
+
+	$user = userLogueado();
+	if($user==false){
+		header("Location: ingreso.php");
+
+	} else {
+		$php2="bienvenida.php";
+		$php3="salida.php";
+		$etiqueta2= $user;
+		$etiqueta3= "Salí";	
+	}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,29 +32,6 @@
 	<![endif]-->
 </head>
 <body>
-	<?php
-
-		//session_start();
-		require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
-
-		$user = userLogueado(); 
-		if($user==false){
-			header("Location: ingreso.php");
-			$php2="ingreso.php"; 
-			$php3="registro.php"; 
-			$etiqueta2= "Ingresá"; 
-			$etiqueta3= "Registrate"; 
-
-		} else {
-			$php2="salida.php"; 
-			$php3="perfil.php"; 
-			$etiqueta2= "SALÍ"; 
-			$etiqueta3= $user; 
-						
-		}
-
-
-	?>
  <header>
  	<div class="fila">
 		<div id="logo">
@@ -68,15 +61,14 @@
 		 </ul>
 	 </nav>
 	</header>
- <main style="width: 50%">
+ <main>
  	<section>
 		<article>
-			<h1 class="principal">¡Hola  <?php echo $etiqueta3?>!</h1>
-			<div class="izq" style="width: 150px">
-				<img src= "avatar/<?php  echo $_SESSION["avatar"]?>" alt="Tu Avatar" width= 50% style= "border-radius: 50%">
+			<h1 class="principal">¡Hola  <?php echo $etiqueta2; ?>!</h1>
+			<div class="contenido">
+				<p>Gracias por regresar a <strong>QuickQuiz</strong>. <br>Ya podés comenzar a jugar y/o preparar tus juegos de preguntas y respuestas.</p>
+				<img src= "avatar/<?php echo $_SESSION["avatar"]; ?>" alt="Tu Avatar" class="avatar" />
 			</div>
-			<p>Gracias por regresar a <strong>QuickQuiz</strong>. <br>Ya podés comenzar a jugar y/o preparar tus juegos de preguntas y respuestas.</p>
-
 		</article>
  	</section>
  </main>

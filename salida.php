@@ -1,3 +1,16 @@
+<?php
+	require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
+	$user = userLogueado();
+	if($user){
+		/*session_start();*/
+		session_destroy();
+		setcookie("userQQ", "", time()-1);
+		setcookie("avatar", "", time()-1);
+		/*header("Location: _self");*/
+	} else {
+		header("Location: ingreso.php");
+	}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,16 +29,6 @@
 	<![endif]-->
 </head>
 <body>
-	<?php
-
-		require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
-		$user = userLogueado(); 
-		if($user!=false){
-			/*session_start();*/
-			session_destroy(); 
-			/*header("Location: _self");*/
-		}
-	?>
  <header>
  	<div class="fila">
 		<div id="logo">
@@ -36,7 +39,7 @@
 		<nav class="top">
 			<ul>
 			<li><a href="jugar.php">JUGÁ</a></li>
-			 <li><a href="ingreso.php">	INGRESÁ</a></li>
+			 <li><a href="ingreso.php">INGRESÁ</a></li>
 			 <li><a href="registro.php">REGISTRATE</a></li>
 			</ul>
 		</nav>
@@ -55,11 +58,13 @@
 		 </ul>
 	 </nav>
 	</header>
- <main style="width: 50%">
+ <main>
  	<section>
 		<article>
 			<h1 class="principal">¡Hasta pronto!</h1>
-			<p>Acabas de cerrar tu sesión en <strong>QuickQuiz</strong></p>
+			<div class="contenido">
+				<p>Acabas de cerrar tu sesión en <strong>QuickQuiz</strong></p>
+			</div>
 		</article>
  	</section>
  </main>

@@ -1,57 +1,52 @@
 <?php
 
-include_once("functions.php");
+	include_once("functions.php");
 
-if ($_POST) {
+	$user = userLogueado();
+	if($user){
+		header("Location: index.php");
 
-  $original = $_FILES["avatar"];
-
-  if ($original["error"] === UPLOAD_ERR_OK) { //UPLOAD_ERR_OK es equivalente a 0
-
-    $nombreViejo = $original["name"]; // Nombre original del archivo
-
-    $extension = pathinfo($nombreViejo, PATHINFO_EXTENSION); // Extensión del archivo subido
-
-    $nombreNuevo = $original["tmp_name"]; // Nombre temporal en el servidor
-
-    $archivoFinal = dirname(__FILE__); // Agarramos el archivo donde estamos parados ahora mismo
-
-    /*$archivoFinal .= "/avatar/"; // .= nos permite concatenar, en este caso es lo mismo que poner $archivoFinal = $archivoFinal . "/img/"
-
-    $archivoFinal .= uniqid() . "." . $extension; // uniqid genera un ID "único" para la foto*/
-
-    $nomDir = "/avatar/";
-
-    $nomAvatar =  uniqid() . "." . $extension;
-   /*var_dump($nombreNuevo, $archivoFinal);exit;*/
-
-   $archivoFinal .= $nomDir . $nomAvatar;
-
-    move_uploaded_file($nombreNuevo, $archivoFinal); // avatar/5b233684235a4.jpg movemos el archivo a la ubicación final
-   }
-  $_POST["avatar"] = $nomAvatar;
-  /*var_dump($_POST);*/
-}
-
-if ($_POST) {
-	$errores = validarDatos($_POST);
-	if(empty($errores)){
-		$usuario = crearUsuario($_POST);
-//		var_dump($usuario);
-		guardarUsuario($usuario);
-			//session_start(); 
-	    	$_SESSION['user']= $_POST["usuario"];
-	    	header("Location: inscripto.php");
-	    	//echo "<script>location.href='inscripto.php';</script>";
-	    	//exit;
+	} else {
+		$php2="bienvenida.php";
+		$php3="salida.php";
+		$etiqueta2= $user;
+		$etiqueta3= "Salí";						
 	}
-}
 
+	if($_POST) {
 
-    
+	$original = $_FILES["avatar"];
+
+	if($original["error"] === UPLOAD_ERR_OK) {
+		$nombreViejo = $original["name"];
+		$extension = pathinfo($nombreViejo, PATHINFO_EXTENSION);
+		$nombreNuevo = $original["tmp_name"];
+		$archivoFinal = dirname(__FILE__);
+		$nomDir = "/avatar/";
+		$nomAvatar =  uniqid() . "." . $extension;
+		/*var_dump($nombreNuevo, $archivoFinal);exit;*/
+		$archivoFinal .= $nomDir . $nomAvatar;
+		move_uploaded_file($nombreNuevo, $archivoFinal);
+	}
+	$_POST["avatar"] = $nomAvatar;
+	/*var_dump($_POST);*/
+	}
+
+	if($_POST) {
+		$errores = validarDatos($_POST);
+		if(empty($errores)){
+			$usuario = crearUsuario($_POST);
+			//var_dump($usuario);
+			guardarUsuario($usuario);
+			//session_start(); 
+			$_SESSION['user'] = $_POST["usuario"];
+			header("Location: inscripto.php");
+			//echo "<script>location.href='inscripto.php';</script>";
+			//exit;
+		}
+	}
+
 ?>
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -101,10 +96,8 @@ if ($_POST) {
  	<section>
  		<h1 class="registro">Registrate:</h1>
 		<article class="formulario">
-			<form action="" method="post" id="registro" enctype="multipart/form-data">
+			<form method="post" id="registro" enctype="multipart/form-data">
 
-
- 				
  				<div class="campo">
  					<label for="usuario">Usuario*: </label>
 					<input type="text" name="usuario" value= "<?php
@@ -156,9 +149,7 @@ if ($_POST) {
  				<div class="campo">
  					<label for="avatar">Elegí tu avatar: </label>
 					<input type="file" name="avatar" value="">
-					
  				</div>
-
 
 				<div class="campo">
 					<button type="submit" form="registro" value="registrarme">Registrarme</button>

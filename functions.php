@@ -1,8 +1,6 @@
 <?php
 
-
 session_start();
-
 
 function validarDatos($datos){
   $errores = [];
@@ -29,7 +27,7 @@ function validarDatos($datos){
   }
   if ($datos ["password-confirm"]=="") {
     $errores["password-confirm"]= "Por favor reingresá tu contraseña";
-  }elseif ($datos["password-confirm"]!==$datos["password"]) {
+  } elseif ($datos["password-confirm"]!==$datos["password"]) {
     $errores["password-confirm"]="Las contraseñas no coinciden";
     $_POST["password"]="";
     $_POST["password-confirm"]="";
@@ -38,15 +36,13 @@ function validarDatos($datos){
   return $errores;
 
 }
-  
-
 
 function crearUsuario($datos){
   return [
     "nombre" => $datos["usuario"],
     "mail" => $datos["email"],
     "usuario" => $datos ["usuario"],
-    "password" => password_hash($datos["password"],PASSWORD_DEFAULT),
+    "password" => password_hash($datos["password"],PASSWORD_BCRYPT),
     "avatar" =>  $datos["avatar"],
   ];
 
@@ -91,41 +87,44 @@ function validarLoginOK($datos){
       $user = json_decode($array[$i],true);
       
       if($datos["usuario"]==$user["usuario"]){
-        $userEncontrado=true; 
-        $avatarEcontrado = $user['avatar'];
-        /*session_start();*/
-        $_SESSION['avatar'] = $avatarEcontrado;
         /*var_dump($datos['usuario'],$user['usuario']);
         echo "<br> User encontrado, valido password"; */
 
-        if (!password_verify($datos["password"], $user["password"]) ){
+        if(!password_verify($datos["password"], $user["password"]) ){
           /*echo "<br> password incorrecta"; */
           $errores["password"]= "Contraseña incorrecta, por favor volvé a ingresarla.";
           return $errores;
           break;
-        };
+        } else {
+          $userEncontrado=true;
+          $_SESSION["user"] = $user["usuario"];
+          $_SESSION["avatar"] = $user["avatar"];
+        }
  
-      };
-    };
+      }
+    }
 
-    
-
-
-    if ($userEncontrado==false) {
+    if($userEncontrado==false) {
       $errores["usuario"]= "Usuario incorrecto, por favor volvé a ingresarlo o registrate si aún no lo hiciste.";
-    };
+    }
     return $errores;
 }
 
 function userLogueado() {
-    /*session_start();*/
-    if(isset($_SESSION['user'])){
-      return $_SESSION['user']; 
-      $avatar = $usuario["avatar"];
-    } else {
-      return false; 
-    } 
+
+  if(isset($_COOKIE["userQQ"])) {
+    $_SESSION["user"] = $_COOKIE["userQQ"];
+    //$_SESSION["avatar"] = $_COOKIE["avatar"];
+  }
+
+  if(isset($_SESSION["user"])){
+    /* var_dump($_SESSION["avatar"]);
+    exit(); */
+    return $_SESSION["user"];
+  } else {
+    return false;
+  }
+
 }
 
 ?>
-

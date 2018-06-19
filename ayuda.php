@@ -1,3 +1,18 @@
+<?php
+	require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
+	$user = userLogueado(); 
+	if ($user==false) {
+		$php2="ingreso.php"; 
+		$php3="registro.php"; 
+		$etiqueta2= "Ingresá"; 
+		$etiqueta3= "Registrate"; 
+	}else{
+		$php2="bienvenida.php";
+		$php3="salida.php";
+		$etiqueta2= "¡Hola $user!";
+		$etiqueta3= "Salí";
+	}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,21 +29,6 @@
 	<![endif]-->
 </head>
 <body>
-	<?php
-		require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
-		$user = userLogueado(); 
-		if ($user==false) {
-			$php2="ingreso.php"; 
-			$php3="registro.php"; 
-			$etiqueta2= "Ingresá"; 
-			$etiqueta3= "Registrate"; 
-		}else{
-			$php2="salida.php"; 
-			$php3="Bienvenida.php"; 
-			$etiqueta2= "Salí"; 
-			$etiqueta3= $user; 
-		}
-	?>
  <header>
  	<div class="fila">
 		<div id="logo">
