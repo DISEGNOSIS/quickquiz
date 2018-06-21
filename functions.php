@@ -114,12 +114,12 @@ function userLogueado() {
 
   if(isset($_COOKIE["userQQ"])) {
     $_SESSION["user"] = $_COOKIE["userQQ"];
-    //$_SESSION["avatar"] = $_COOKIE["avatar"];
+    $_SESSION["avatar"] = $_COOKIE["avatar"];
   }
 
   if(isset($_SESSION["user"])){
     /* var_dump($_SESSION["avatar"]);
-    exit(); */
+    exit; */
     return $_SESSION["user"];
   } else {
     return false;

@@ -9,7 +9,7 @@
 	}else{
 		$php2="bienvenida.php";
 		$php3="salida.php";
-		$etiqueta2= "¡Hola $user!";
+		$etiqueta2= $user;
 		$etiqueta3= "Salí";
 	}
 ?>
@@ -22,7 +22,7 @@
 	<title>QuickQuiz - Ayuda.</title>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="fonts/css/fontawesome-all.css">
-	<link href="https://fonts.googleapis.com/css?family=Parisienne|Rambla" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Parisienne|Indie+Flower" rel="stylesheet">
 	<link rel="icon" href="img/favicon.png" type="image/x-icon">
   <!--[if lt IE 9]>
   	<script src="js/html5shiv.js"></script>

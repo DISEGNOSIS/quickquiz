@@ -4,7 +4,6 @@
 	$user = userLogueado(); 
 	if($user){
 		header("Location: index.php");
-
 	} else {
 		$php2="bienvenida.php";
 		$php3="salida.php";
@@ -37,23 +36,14 @@
 			if (empty($loginInvalido)) {
 			/*echo "<br> DESPUES de validar login";*/
 				//session_start(); 
-				/* var_dump($_SESSION);
-          		exit(); */
+				if(isset($_POST['recordarme'])) {
+					$cookie_name = "userQQ"; 
+					$cookie_value = $usuario;
+					setcookie($cookie_name, $cookie_value, time()+2592000);
+					setcookie("avatar", $_SESSION["avatar"], time()+2592000);
+				}
 				header('Location: bienvenida.php');
 			}
-			
-     //}else {
-
-        //var_dump($loginInvalido);
-		}
-		
-		if(isset($_POST['recordarme'])) {
-			$cookie_name = "userQQ"; 
-			$cookie_value = $usuario;
-			setcookie($cookie_name, $cookie_value, time()+2592000);
-			setcookie("avatar", $avatar, time()+2592000);
-			/* var_dump($_COOKIE);
-			exit(); */
 		}
 
 	}
@@ -67,7 +57,7 @@
 	<title>QuickQuiz - Ingresá a tu cuenta.</title>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="fonts/css/fontawesome-all.css">
-	<link href="https://fonts.googleapis.com/css?family=Parisienne|Rambla" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Parisienne|Rambla|Indie+Flower" rel="stylesheet">
 	<link rel="icon" href="img/favicon.png" type="image/x-icon">
   <!--[if lt IE 9]>
   	<script src="js/html5shiv.js"></script>

@@ -23,10 +23,8 @@
 	<title>QuickQuiz - Juegos para el aprendizaje.</title>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="fonts/css/fontawesome-all.css">
-	<link href="https://fonts.googleapis.com/css?family=Parisienne|Rambla" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Parisienne|Rambla|Indie+Flower" rel="stylesheet">
 	<link rel="icon" href="img/favicon.png" type="image/x-icon">
-<!--agrego un font de prueba-Mariela-->
-	<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
   <!--[if lt IE 9]>
   	<script src="js/html5shiv.js"></script>
 	<![endif]-->
@@ -67,7 +65,7 @@
 			<h1 class="principal">¡Hola  <?php echo $etiqueta2; ?>!</h1>
 			<div class="contenido">
 				<p>Gracias por regresar a <strong>QuickQuiz</strong>. <br>Ya podés comenzar a jugar y/o preparar tus juegos de preguntas y respuestas.</p>
-				<img src= "<?php echo "avatar/" . $_SESSION['avatar']?>" alt="Tu Avatar" class="avatar" />
+				<img src= "avatar/<?php echo $_SESSION['avatar']; ?>" alt="Tu Avatar" class="avatar" />
 			</div>
 		</article>
  	</section>
