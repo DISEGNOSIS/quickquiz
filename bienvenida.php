@@ -67,7 +67,7 @@
 			<h1 class="principal">¡Hola  <?php echo $etiqueta2; ?>!</h1>
 			<div class="contenido">
 				<p>Gracias por regresar a <strong>QuickQuiz</strong>. <br>Ya podés comenzar a jugar y/o preparar tus juegos de preguntas y respuestas.</p>
-				<img src= "avatar/<?php echo $_SESSION["avatar"]; ?>" alt="Tu Avatar" class="avatar" />
+				<img src= "<?php echo "avatar/" . $_SESSION['avatar']?>" alt="Tu Avatar" class="avatar" />
 			</div>
 		</article>
  	</section>
