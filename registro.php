@@ -38,8 +38,9 @@
 			$usuario = crearUsuario($_POST);
 			//var_dump($usuario);
 			guardarUsuario($usuario);
-			//session_start(); 
-			$_SESSION['user'] = $_POST["usuario"];
+			//session_start();
+			$_SESSION["user"] = $_POST["usuario"];
+          	$_SESSION["avatar"] = $_POST["avatar"];
 			header("Location: inscripto.php");
 			//echo "<script>location.href='inscripto.php';</script>";
 			//exit;

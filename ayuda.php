@@ -22,7 +22,7 @@
 	<title>QuickQuiz - Ayuda.</title>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="fonts/css/fontawesome-all.css">
-	<link href="https://fonts.googleapis.com/css?family=Parisienne|Indie+Flower" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Parisienne|Rambla|Indie+Flower" rel="stylesheet">
 	<link rel="icon" href="img/favicon.png" type="image/x-icon">
   <!--[if lt IE 9]>
   	<script src="js/html5shiv.js"></script>
