@@ -100,7 +100,7 @@
 			<form action="" method="post" id="ingreso">
  				<div class="campo">
  					<label for="usuario">Usuario: </label>
-					<input type="text" name="usuario" value="<?=$usuario?>">
+					<input type="text" name="usuario" value="<?=$usuario?>" required>
  				</div>
  				<div class="error">
 					<span ><?php echo isset($loginInvalido["usuario"])? $loginInvalido["usuario"]:"";?> </span>
@@ -108,7 +108,7 @@
  
 				<div class="campo">
  					<label for="password">Contraseña: </label>
-					<input type="password" name="password" value="<?=$password?>">
+					<input type="password" name="password" value="<?=$password?>" required>
 				</div>				
  				<div class="error">
 					<span ><?php echo isset($loginInvalido["password"])? $loginInvalido["password"]:"";?> </span>

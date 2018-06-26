@@ -105,7 +105,7 @@
 					 if ($_POST && $_POST["usuario"] !== "") {
 					 	echo $_POST["usuario"];
 					 }else echo "";
-					 ?>">
+					 ?>" required>
 				</div>
 				<div class="error">
 					<span ><?php echo isset($errores["usuario"])? $errores["usuario"]: "";?> </span>
@@ -117,7 +117,7 @@
 					 if ($_POST && $_POST["email"] !== "") {
 					 	echo $_POST["email"];
 					 }else echo "";
-					 ?>">
+					 ?>" required>
 				</div>
  				<div class="error">
  					<span  class='error'><?php echo isset($errores["email"])? $errores["email"]:"";?> </span>
@@ -129,7 +129,7 @@
 					 if ($_POST && $_POST["email_confirm"] !== "") {
 					 	echo $_POST["email_confirm"];
 					 }else echo "";
-					 ?>">
+					 ?>" required>
  				</div>
  				<div class="error">
  					<span  class='error'><?php echo isset($errores["email_confirm"])? $errores["email_confirm"]:"";?> </span>
@@ -137,13 +137,13 @@
  				
  				<div class="campo">
  					<label for="password">Contraseña*: </label>
-					<input type="password" name="password" value="">
+					<input type="password" name="password" value="" required>
 	  			</div>
  				<div  class="error" style='clear:both'><?php echo isset($errores["password"])? $errores["password"]:"";?> </div>
  				
  				<div class="campo">
  					<label for="password-confirm">Confirmá tu Contraseña*: </label>
-					<input type="password" name="password-confirm" value="">
+					<input type="password" name="password-confirm" value="" required>
 				</div>
  				<div  class="error" style='clear:both'><?php echo isset($errores["password-confirm"])? $errores["password-confirm"]:"";?> </div>
 
