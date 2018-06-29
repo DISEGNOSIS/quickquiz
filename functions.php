@@ -2,6 +2,8 @@
 
 session_start();
 
+/*pasado a validación.php
+
 function validarDatos($datos){
   $errores = [];
   if ($datos["usuario"]=="") {
@@ -19,9 +21,6 @@ function validarDatos($datos){
     $errores["email_confirm"]="Los email no coinciden";
     $_POST["email_confirm"]="";
   }
-  /*if ($datos["username"]=="") {
-   $errores["username"]="Por favor ingrese su usuario";
-  }*/
   if ($datos["password"]=="") {
     $errores["password"]= "Por favor ingresá una contraseña";
   }
@@ -36,6 +35,9 @@ function validarDatos($datos){
   return $errores;
 
 }
+*/
+
+/*esta función no es necesaria, se una New Usuario
 
 function crearUsuario($datos){
   return [
@@ -47,6 +49,7 @@ function crearUsuario($datos){
   ];
 
 }
+*/
 
 function guardarUsuario($usuario){
   $user= json_encode($usuario);
