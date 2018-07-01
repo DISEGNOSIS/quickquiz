@@ -1,11 +1,16 @@
 <?php
+	include_once("autoload.php");
 
 	//session_start();
-	require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
+//OOP	require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
+
 
 	$avatar = $_SESSION["avatar"];
-	$user = userLogueado();
-	if($user==false){
+/*	$user = userLogueado();
+	if($user==false){*/
+	$session = new session(); 
+	if (!$session->estalogueado()) {
+
 		header("Location: ingreso.php");
 
 	} else {

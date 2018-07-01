@@ -3,20 +3,26 @@
 	include_once("autoload.php");
 
 	//$user = userLogueado(); cambiado por la funcion de session.php
-	if(estaLogueado()){
+	$session = new session(); 
+	if ($session->estalogueado()) {
 		header("Location: index.php");
 
 	} else {
+		$php2="ingreso.php";
+		$php3="registro.php";
+		$etiqueta2= "Ingresá";
+		$etiqueta3= "Registrate";
+
+/*corregido porque no estaba ok. Si está logueado va a index, sino, se queda en registro con los botones de ingreso y regsitro
 		$php2="bienvenida.php";
 		$php3="salida.php";
 		$etiqueta2= $user;
 		$etiqueta3= "Salí";						
+*/
 	}
 
 	if($_POST) {
-
-	
-	$avatar = New Avatar(); 
+	//AVATAR CORREGIR - temporalmente deshabilitado para ver funcionamiento ok. 	$avatar = New Avatar(); 
 
 	/*pasado a clase avatar... 
 
@@ -33,26 +39,31 @@
 		move_uploaded_file($nombreNuevo, $archivoFinal);
 	}
 	*/
-		$_POST["avatar"] = $avatar->getNombre(); //= $nomAvatar; cambiado por nueva funcion en avatar.
+	//AVATAR CORREGIR - temporalmente deshabilitado para ver funcionamiento ok.	$_POST["avatar"] = $avatar->getNombre(); //= $nomAvatar; 
+		$_POST["avatar"] = "avatar"; 
+
+	//cambiado por nueva funcion en avatar.
 	/*var_dump($_POST);*/
+
 	}
 
 	if($_POST) {
 		//OOP 	$errores = validarDatos($_POST);
 		//OOP 	if(empty($errores)){
-		if(Validaciones::validarDatos($_POST)){
-			$usuario = New Usuario($_POST['username'], $_POST['email'], $_POST['password'], $_POST['avatar']);
-			//var_dump($usuario);
-			$Json = New Json; //AGREGADO PARA MANEJO CON jSON
-			Json->guardarUsuario($usuario); // antes solo guardarUsuario($usuario); 
+		if(Validacion::validarDatos($_POST)){
+			$usuario = New Usuario($_POST['usuario'], $_POST['email'], $_POST['password'], $_POST['avatar']);
+			var_dump($usuario);
+			$json = New Json; //AGREGADO PARA MANEJO CON jSON
+			$json->guardarUsuario($usuario); // antes solo guardarUsuario($usuario); 
 			//session_start();
 			$session = New session(); //agregado para OOP
 			$session->login($usuario); //agregado para OOP
 			//$_SESSION["user"] = $_POST["usuario"]; eliminado para OOP
           	//$_SESSION["avatar"] = $_POST["avatar"]; eliminado para OOP
-			header("Location: inscripto.php");
 			//echo "<script>location.href='inscripto.php';</script>";
 			//exit;
+			//OOP temporal header("Location: inscripto.php");
+			
 		}
 	}
 

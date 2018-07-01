@@ -4,7 +4,8 @@
 	include_once("autoload.php");
 
 	//$user = userLogueado(); cambiado por la funcion de session.php
-	if (!estalogueado()) {
+	$session = new session(); 
+	if (!$session->estalogueado()) {
 		$php2="ingreso.php";
 		$php3="registro.php";
 		$etiqueta2= "Ingresá";

@@ -3,7 +3,8 @@
 	//	require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
 
 	//$user = userLogueado(); 
-	if(!estaLogueado()){
+	$session = new session(); 
+	if (!$session->estalogueado()) {
 		header("Location: ingreso.php");
 		$php2="ingreso.php";
 		$php3="registro.php";

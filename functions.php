@@ -78,7 +78,7 @@ function validarLoginCompleto($datos){
   return $errores;
 }
 */
-
+/* pasado a validacion
 function validarLoginOK($datos){
     $errores = [];
     $userEncontrado=false;
@@ -92,11 +92,8 @@ function validarLoginOK($datos){
       $user = json_decode($array[$i],true);
       
       if($datos["usuario"]==$user["usuario"]){
-        /*var_dump($datos['usuario'],$user['usuario']);
-        echo "<br> User encontrado, valido password"; */
 
         if(!password_verify($datos["password"], $user["password"]) ){
-          /*echo "<br> password incorrecta"; */
           $errores["password"]= "Contraseña incorrecta, por favor volvé a ingresarla.";
           return $errores;
           break;
@@ -114,7 +111,8 @@ function validarLoginOK($datos){
     }
     return $errores;
 }
-
+*/
+/* ya está la funcion estaLogueado en clase session
 function userLogueado() {
 
   if(isset($_COOKIE["userQQ"])) {
@@ -123,13 +121,11 @@ function userLogueado() {
   }
 
   if(isset($_SESSION["user"])){
-    /* var_dump($_SESSION["avatar"]);
-    exit; */
     return $_SESSION["user"];
   } else {
     return false;
   }
 
 }
-
+]*/
 ?>

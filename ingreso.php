@@ -4,13 +4,21 @@
 
 	//OOP	$user = userLogueado(); 
 	//OOPif($user){
-	if(estaLogueado()){
+	$session = new session(); 
+	if ($session->estalogueado()) {
 		header("Location: index.php");
 	} else {
-		$php2="bienvenida.php";
+		$php2="ingreso.php";
+		$php3="registro.php";
+		$etiqueta2= "Ingresá";
+		$etiqueta3= "Registrate";
+
+/*corregido porque no estaba ok. Si está logueado va a index, sino, se queda en registro con los botones de ingreso y regsitro
+	$php2="bienvenida.php";
 		$php3="salida.php";
 		$etiqueta2= $user;
 		$etiqueta3= "Salí";							
+*/
 	}
 	
 	if(!isset($_COOKIE["userQQ"])){
@@ -20,23 +28,25 @@
 	}
 
     //OOP 	$loginInvalido = false; //revisar si se puede sacar! debería poderse... 
-
+echo "antes de if post";
 	if($_POST) {
-//echo "<br> entra al post";
+echo "<br> entra al post";
 //		var_dump($_POST); 
 		//OOP		$usuario = $_POST['usuario'];
 		//OOP 		$password = $_POST['password'];
-		$usuario = New Usuario($_POST['usuario'], $_POST['email'], $_POST['password'], $_POST['avatar']); 
-	    //OOP 	$loginInvalido = validarLoginCompleto($_POST);
+		//OOP 	$loginInvalido = validarLoginCompleto($_POST);
 
 	    //OOP 	if(empty($loginInvalido)) {
-		if (Validacion::validarLoginCompleto)
-		    /*echo "login completo";*/
-	    	$loginInvalido = validarLoginOK($_POST);
-    	/*echo "<br> antes de validar login";
-			var_dump($loginInvalido);*/
+		if (!Validacion::validarLoginCompleto($_POST)){
+		    echo "login completo";
+	    	//OOP $loginInvalido = validarLoginOK($usuario);
+    		echo "<br> antes de validar login";
+//			var_dump($loginInvalido);
 
-			if (empty($loginInvalido)) {
+			//OOP if (empty($loginInvalido)) {
+			$usuarioIngreso = New Usuario($_POST['usuario'],'', $_POST['password'], '');
+			var_dump($usuarioIngreso);  
+	    	if (Validacion::validarLoginOK($usuarioIngreso)){
 			/*echo "<br> DESPUES de validar login";*/
 				//session_start(); 
 				if(isset($_POST['recordarme'])) {
@@ -45,7 +55,8 @@
 					setcookie($cookie_name, $cookie_value, time()+2592000);
 					setcookie("avatar", $_SESSION["avatar"], time()+2592000);
 				}
-				header('Location: bienvenida.php');
+				$session->login($usuarioIngreso); 
+				//OOP temporal header('Location: bienvenida.php');
 			}
 		}
 
