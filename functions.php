@@ -50,7 +50,7 @@ function crearUsuario($datos){
 
 }
 */
-
+/*a json
 function guardarUsuario($usuario){
   $user= json_encode($usuario);
   $json= file_get_contents("usuarios.json");
@@ -59,13 +59,14 @@ function guardarUsuario($usuario){
   $array= json_encode($array);
   file_put_contents("usuarios.json",$array);
 }
-
+*/
 /*function test(){
   $json= file_get_contents("usuarios.json");
   $array= json_decode($json,true);
   var_dump($array);
 }*/
 
+/*pasado a Validaciones
 function validarLoginCompleto($datos){
   $errores = [];
   if ($datos["usuario"]=="") {
@@ -76,6 +77,7 @@ function validarLoginCompleto($datos){
   }
   return $errores;
 }
+*/
 
 function validarLoginOK($datos){
     $errores = [];

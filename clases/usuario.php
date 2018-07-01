@@ -1,7 +1,7 @@
 <?php
 include_once ("autoload.php"); 
 
-	class usuario {
+	class Usuario {
 		private $username; 
 		private $email; 
 		private $password; 

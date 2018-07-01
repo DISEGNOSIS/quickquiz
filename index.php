@@ -1,7 +1,10 @@
 <?php
-	require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
-	$user = userLogueado();
-	if ($user==false) {
+
+	//require("functions.php"); cambiado por autoload//PARA QUE LLAME A LAS FUNCIONES CREADAS 
+	include_once("autoload.php");
+
+	//$user = userLogueado(); cambiado por la funcion de session.php
+	if (!estalogueado()) {
 		$php2="ingreso.php";
 		$php3="registro.php";
 		$etiqueta2= "Ingresá";

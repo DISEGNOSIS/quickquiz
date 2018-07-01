@@ -1,8 +1,10 @@
 <?php
-	require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
+	include_once("autoload.php");
+	//OOP	require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
 
-	$user = userLogueado(); 
-	if($user){
+	//OOP	$user = userLogueado(); 
+	//OOPif($user){
+	if(estaLogueado()){
 		header("Location: index.php");
 	} else {
 		$php2="bienvenida.php";
@@ -17,17 +19,18 @@
 		$recordar = "";
 	}
 
-    $loginInvalido = false;
+    //OOP 	$loginInvalido = false; //revisar si se puede sacar! debería poderse... 
 
 	if($_POST) {
 //echo "<br> entra al post";
 //		var_dump($_POST); 
-		$usuario = $_POST['usuario'];
-		$password = $_POST['password'];
-	    
-	    $loginInvalido = validarLoginCompleto($_POST);
+		//OOP		$usuario = $_POST['usuario'];
+		//OOP 		$password = $_POST['password'];
+		$usuario = New Usuario($_POST['usuario'], $_POST['email'], $_POST['password'], $_POST['avatar']); 
+	    //OOP 	$loginInvalido = validarLoginCompleto($_POST);
 
-	    if(empty($loginInvalido)) {
+	    //OOP 	if(empty($loginInvalido)) {
+		if (Validacion::validarLoginCompleto)
 		    /*echo "login completo";*/
 	    	$loginInvalido = validarLoginOK($_POST);
     	/*echo "<br> antes de validar login";

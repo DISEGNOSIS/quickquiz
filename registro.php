@@ -1,9 +1,9 @@
 <?php
 
-	include_once("functions.php");
+	include_once("autoload.php");
 
-	$user = userLogueado();
-	if($user){
+	//$user = userLogueado(); cambiado por la funcion de session.php
+	if(estaLogueado()){
 		header("Location: index.php");
 
 	} else {
@@ -15,6 +15,11 @@
 
 	if($_POST) {
 
+	
+	$avatar = New Avatar(); 
+
+	/*pasado a clase avatar... 
+
 	$original = $_FILES["avatar"];
 
 	if($original["error"] === UPLOAD_ERR_OK) {
@@ -24,23 +29,27 @@
 		$archivoFinal = dirname(__FILE__);
 		$nomDir = "/avatar/";
 		$nomAvatar =  uniqid() . "." . $extension;
-		/*var_dump($nombreNuevo, $archivoFinal);exit;*/
 		$archivoFinal .= $nomDir . $nomAvatar;
 		move_uploaded_file($nombreNuevo, $archivoFinal);
 	}
-	$_POST["avatar"] = $nomAvatar;
+	*/
+		$_POST["avatar"] = $avatar->getNombre(); //= $nomAvatar; cambiado por nueva funcion en avatar.
 	/*var_dump($_POST);*/
 	}
 
 	if($_POST) {
-		$errores = validarDatos($_POST);
-		if(empty($errores)){
-			$usuario = crearUsuario($_POST);
+		//OOP 	$errores = validarDatos($_POST);
+		//OOP 	if(empty($errores)){
+		if(Validaciones::validarDatos($_POST)){
+			$usuario = New Usuario($_POST['username'], $_POST['email'], $_POST['password'], $_POST['avatar']);
 			//var_dump($usuario);
-			guardarUsuario($usuario);
+			$Json = New Json; //AGREGADO PARA MANEJO CON jSON
+			Json->guardarUsuario($usuario); // antes solo guardarUsuario($usuario); 
 			//session_start();
-			$_SESSION["user"] = $_POST["usuario"];
-          	$_SESSION["avatar"] = $_POST["avatar"];
+			$session = New session(); //agregado para OOP
+			$session->login($usuario); //agregado para OOP
+			//$_SESSION["user"] = $_POST["usuario"]; eliminado para OOP
+          	//$_SESSION["avatar"] = $_POST["avatar"]; eliminado para OOP
 			header("Location: inscripto.php");
 			//echo "<script>location.href='inscripto.php';</script>";
 			//exit;

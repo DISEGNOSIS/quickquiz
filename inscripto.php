@@ -1,8 +1,9 @@
 <?php
-	require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
+	include_once("autoload.php"); //OOP
+	//	require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
 
-	$user = userLogueado(); 
-	if($user==false){
+	//$user = userLogueado(); 
+	if(!estaLogueado()){
 		header("Location: ingreso.php");
 		$php2="ingreso.php";
 		$php3="registro.php";

@@ -9,8 +9,9 @@ class Session
 		session_start(); 
 	}
 
-	public function login($user, $password){
-		$_SESSION["user"] = 
+	public function login($usuario){
+		$_SESSION["user"] = $usuario->getUserName(); 
+		$_SESSION["avatar"] = $usuario->getAvatar(); 
 	}
 
 	public function estaLogueado(){
