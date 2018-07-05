@@ -13,43 +13,16 @@
 		$etiqueta2= "Ingresá";
 		$etiqueta3= "Registrate";
 
-/*corregido porque no estaba ok. Si está logueado va a index, sino, se queda en registro con los botones de ingreso y regsitro
-		$php2="bienvenida.php";
-		$php3="salida.php";
-		$etiqueta2= $user;
-		$etiqueta3= "Salí";						
-*/
 	}
 
 	if($_POST) {
-	//AVATAR CORREGIR - temporalmente deshabilitado para ver funcionamiento ok. 	$avatar = New Avatar(); 
-
-	/*pasado a clase avatar... 
-
-	$original = $_FILES["avatar"];
-
-	if($original["error"] === UPLOAD_ERR_OK) {
-		$nombreViejo = $original["name"];
-		$extension = pathinfo($nombreViejo, PATHINFO_EXTENSION);
-		$nombreNuevo = $original["tmp_name"];
-		$archivoFinal = dirname(__FILE__);
-		$nomDir = "/avatar/";
-		$nomAvatar =  uniqid() . "." . $extension;
-		$archivoFinal .= $nomDir . $nomAvatar;
-		move_uploaded_file($nombreNuevo, $archivoFinal);
-	}
-	*/
-	//AVATAR CORREGIR - temporalmente deshabilitado para ver funcionamiento ok.	$_POST["avatar"] = $avatar->getNombre(); //= $nomAvatar; 
-		$_POST["avatar"] = "avatar"; 
-
-	//cambiado por nueva funcion en avatar.
-	/*var_dump($_POST);*/
-
+		$avatar = New Avatar(); 
+		$_POST["avatar"] = $avatar->getNombre(); //= $nomAvatar; 
+		//cambiado por nueva funcion en avatar.
+		/*var_dump($_POST);*/
 	}
 
 	if($_POST) {
-		//OOP 	$errores = validarDatos($_POST);
-		//OOP 	if(empty($errores)){
 		$errores=Validacion::validarDatos($_POST); 
 		if(empty($errores)){
 			$usuario = New Usuario($_POST['usuario'], $_POST['email_confirm'], '', $_POST['avatar']);
