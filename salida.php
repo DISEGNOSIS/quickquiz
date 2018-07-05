@@ -1,9 +1,20 @@
 <?php
-	require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
-	$user = userLogueado();
-	if($user){
+
+	//require("functions.php"); cambiado por autoload//PARA QUE LLAME A LAS FUNCIONES CREADAS 
+	include_once("autoload.php");
+
+	//$user = userLogueado(); cambiado por la funcion de session.php
+	//if($user){
+//echo "viene a salida.php y me voy!!!"; 
+	$session = new Session(); 
+
+	if ($session->estalogueado()) {
 		/*session_start();*/
-		session_destroy();
+		//session_destroy();
+		$session->logout(); 
+//var_dump($session->estalogueado()); 
+//exit; 
+		/*
 		setcookie("userQQ", "", time()-1);
 		setcookie("avatar", "", time()-1);
 		/*header("Location: _self");*/

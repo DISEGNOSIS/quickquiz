@@ -1,7 +1,10 @@
 <?php
-	require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
-	$user = userLogueado(); 
-	if ($user==false) {
+	include_once("autoload.php");
+//	require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
+//	$user = userLogueado(); 
+//	if ($user==false) {
+	$session = new session(); 
+	if (!$session->estalogueado()) {
 		$php2="ingreso.php"; 
 		$php3="registro.php"; 
 		$etiqueta2= "Ingresá"; 
@@ -9,7 +12,7 @@
 	}else{
 		$php2="bienvenida.php";
 		$php3="salida.php";
-		$etiqueta2= $user;
+		$etiqueta2= $session->usuario;
 		$etiqueta3= "Salí";
 	}
 ?>

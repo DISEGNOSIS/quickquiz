@@ -5,6 +5,8 @@
 	//OOP	$user = userLogueado(); 
 	//OOPif($user){
 	$session = new session(); 
+//echo "<br> en ingreso, esta logueado <br>";
+//var_dump($session->estalogueado()); 
 	if ($session->estalogueado()) {
 		header("Location: index.php");
 	} else {
@@ -28,34 +30,40 @@
 	}
 
     //OOP 	$loginInvalido = false; //revisar si se puede sacar! debería poderse... 
-echo "antes de if post";
+//echo "antes de if post";
 	if($_POST) {
-echo "<br> entra al post";
+//echo "<br> entra al post";
 //		var_dump($_POST); 
 		//OOP		$usuario = $_POST['usuario'];
 		//OOP 		$password = $_POST['password'];
 		//OOP 	$loginInvalido = validarLoginCompleto($_POST);
 
 	    //OOP 	if(empty($loginInvalido)) {
-		if (!Validacion::validarLoginCompleto($_POST)){
-		    echo "login completo";
+		$errores=Validacion::validarLoginCompleto($_POST); 
+		if(empty($errores)){
+//		    echo "<br> login completo <br>";
 	    	//OOP $loginInvalido = validarLoginOK($usuario);
-    		echo "<br> antes de validar login";
+//    		echo "<br> antes de validar login";
 //			var_dump($loginInvalido);
 
 			//OOP if (empty($loginInvalido)) {
 			$usuarioIngreso = New Usuario($_POST['usuario'],'', $_POST['password'], '');
-			var_dump($usuarioIngreso);  
-	    	if (Validacion::validarLoginOK($usuarioIngreso)){
+//		    echo "<br> usuario ingreso en ingreso.php <br>";
+//			var_dump($usuarioIngreso);  
+			$errores=Validacion::validarLoginOK($usuarioIngreso); 
+			if(empty($errores)){
 			/*echo "<br> DESPUES de validar login";*/
 				//session_start(); 
 				if(isset($_POST['recordarme'])) {
 					$cookie_name = "userQQ"; 
-					$cookie_value = $usuario;
+					$cookie_value = $usuarioIngreso->getUsername;
 					setcookie($cookie_name, $cookie_value, time()+2592000);
 					setcookie("avatar", $_SESSION["avatar"], time()+2592000);
 				}
+//				echo "va a hacer login";
 				$session->login($usuarioIngreso); 
+				header("Location: index.php");
+
 				//OOP temporal header('Location: bienvenida.php');
 			}
 		}

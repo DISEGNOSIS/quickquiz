@@ -1,22 +1,25 @@
 <?php
 	include_once("autoload.php");
 
+//echo"registrado"; 
+//exit; 
 	//session_start();
 //OOP	require("functions.php"); //PARA QUE LLAME A LAS FUNCIONES CREADAS
 
 
-	$avatar = $_SESSION["avatar"];
 /*	$user = userLogueado();
 	if($user==false){*/
 	$session = new session(); 
 	if (!$session->estalogueado()) {
+//exit; 
 
 		header("Location: ingreso.php");
 
 	} else {
+		$avatar = $_SESSION["avatar"];
 		$php2="bienvenida.php";
 		$php3="salida.php";
-		$etiqueta2= $user;
+		$etiqueta2= $session->usuario;
 		$etiqueta3= "Salí";	
 	}
 ?>

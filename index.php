@@ -13,7 +13,7 @@
 	}else{
 		$php2="bienvenida.php";
 		$php3="salida.php";
-		$etiqueta2= $user;
+		$etiqueta2= $session->usuario;
 		$etiqueta3= "Salí";	
 	}
 ?>

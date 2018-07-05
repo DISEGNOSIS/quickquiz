@@ -30,6 +30,7 @@ include_once ("autoload.php");
        $errores["username"]="Por favor ingrese su usuario";
       }*/
       if ($datos["password"]=="") {
+
         $errores["password"]= "Por favor ingresá una contraseña";
         $hayError = true; 
       }
@@ -42,18 +43,17 @@ include_once ("autoload.php");
         $_POST["password-confirm"]="";
         $hayError = true; 
       }
-
-      return $hayError;
-
+      $datosValidos=!$hayError; 
+      return $errores;
     }
 
     public static function validarLoginCompleto($datos){
-      echo "<br> Hola!";
-      var_dump($datos); 
+//     echo "<br> validarLoginCompleto!";
+//      var_dump($datos); 
       $errores = [];
       $hayError = false;
-      echo "<br> CHAU???!";
-
+/*      echo "<br> CHAU???!";
+      var_dump($hayError); */
       if ($datos["usuario"]=="") {
         $errores["usuario"]= "Por Favor ingresá tu usuario." ;
         $hayError = true; 
@@ -62,11 +62,11 @@ include_once ("autoload.php");
           $errores["password"]= "Por Favor ingresá tu contraseña.";
           $hayError = true; 
       }
-      echo "<br> $hayError"; 
-      return $hayError;
+      var_dump($errores); 
+      return $errores;
     }
 
-    public static function validarLoginOK($usuario){
+    public static function validarLoginOK(usuario $usuario){
         $errores = [];
         $userEncontrado=false;
 
@@ -74,24 +74,34 @@ include_once ("autoload.php");
         $json= file_get_contents("usuarios.json");
         $array= json_decode($json,true);
         $array = $array["usuarios"];
-        var_dump($array);
+//        echo "<br> en validarLoginOK <br>";
+//        var_dump($array);
+
 
         for ($i=0; $i < count($array); $i++) {
           
           $user = json_decode($array[$i],true);
-          
+      
           if($usuario->getUsername()==$user["usuario"]){
-            var_dump($datos['usuario'],$user['usuario']);
-            echo "<br> User encontrado, valido password"; 
-
+//          var_dump($datos['usuario'],$user['usuario']);
+/*          echo "<br> User encontrado, valido password"; 
+     echo "<br> validarLoginOK password: <br>";
+var_dump($user["password"]); 
+         echo "<br> validarLoginOK getPassword: <br>";
+var_dump($usuario->getPassword()); 
+         echo "<br> validarLoginOK !PasswordVerify: <br>";
+var_dump(!password_verify($usuario->getPassword(), $user["password"])); */
             if(!password_verify($usuario->getPassword(), $user["password"]) ){
-              /*echo "<br> password incorrecta"; */
+//              echo "<br> password incorrecta"; 
+//                    exit; 
               $errores["password"]= "Contraseña incorrecta, por favor volvé a ingresarla.";
               return $errores;
               break;
 
             } else {
-              $userEncontrado=true;
+//              echo "<br> password correcta"; 
+//                      exit; 
+            $userEncontrado=true;
               //OOP
               $usuario->setEmail($user["email"]);
               $usuario->setAvatar($user["avatar"]); 

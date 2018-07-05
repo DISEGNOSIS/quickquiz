@@ -50,19 +50,20 @@
 	if($_POST) {
 		//OOP 	$errores = validarDatos($_POST);
 		//OOP 	if(empty($errores)){
-		if(Validacion::validarDatos($_POST)){
-			$usuario = New Usuario($_POST['usuario'], $_POST['email'], $_POST['password'], $_POST['avatar']);
-			var_dump($usuario);
+		$errores=Validacion::validarDatos($_POST); 
+		if(empty($errores)){
+			$usuario = New Usuario($_POST['usuario'], $_POST['email_confirm'], '', $_POST['avatar']);
+			$usuario->setPassword($_POST['password']); 
 			$json = New Json; //AGREGADO PARA MANEJO CON jSON
+
+//	echo "<br> usuario en registro php: <br>"; 
+//	var_dump($usuario);
 			$json->guardarUsuario($usuario); // antes solo guardarUsuario($usuario); 
-			//session_start();
-			$session = New session(); //agregado para OOP
 			$session->login($usuario); //agregado para OOP
 			//$_SESSION["user"] = $_POST["usuario"]; eliminado para OOP
           	//$_SESSION["avatar"] = $_POST["avatar"]; eliminado para OOP
 			//echo "<script>location.href='inscripto.php';</script>";
-			//exit;
-			//OOP temporal header("Location: inscripto.php");
+			header("Location: bienvenida.php");
 			
 		}
 	}
