@@ -9,14 +9,14 @@ class Mysql extends DB {
   public function __construct() {
     $dsn = "mysql:host=localhost;dbname=quickquiz_db;charset=utf8mb4";
     $usuario = "root";
-    $password = "root";
+    $password = "";
 
     // Fijarse que en este caso, el constructor está seteando la variable $this->db para usar como base de datos.
     $this->db = new PDO($dsn, $usuario, $password);
   }
 
   // Llamo a la función que está en Mariela usa sin public y Sin (Usuario $username) usa ($username). Revisar setPassword y setEmail que Mariela no usó en el constructor de usuario.
-    public function guardarUsuario(Usuario $username) {
+    public function guardarUsuario(Usuario $user) {
     
     // Query para enviar - Controlar nombre de la tabla que vamos a usar. Campos: respeto nombres en Json de Mariela
 
@@ -27,10 +27,10 @@ class Mysql extends DB {
 
     // Bindeo según usuario.php de Mariela al 6/07
     
-    $query->bindParam(":username", $usuario->getUsername());
-    $query->bindParam(":email", $usuario->getEmail());
-    $query->bindParam(":password", $usuario->getPassword());
-    $query->bindParam(":avatar", $usuario->getAvatar());
+    $query->bindParam(":username", $user->getUsername());
+    $query->bindParam(":email", $user->getEmail());
+    $query->bindParam(":password", $user->getPassword());
+    $query->bindParam(":avatar", $user->getAvatar());
 
     $query->execute();
   }
