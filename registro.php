@@ -27,8 +27,8 @@
 		if(empty($errores)){
 			$usuario = New Usuario($_POST['usuario'], $_POST['email_confirm'], '', $_POST['avatar']);
 			$usuario->setPassword($_POST['password']); 
-			$db = New Json; //AGREGADO PARA MANEJO CON jSON
-			//$db = New Mysql; //AGREGADO PARA MANEJO CON MySQL
+//			$db = New Json; //AGREGADO PARA MANEJO CON jSON
+			$db = New Mysql; //AGREGADO PARA MANEJO CON MySQL
 			
 //	echo "<br> usuario en registro php: <br>"; 
 //	var_dump($usuario);

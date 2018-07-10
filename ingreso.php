@@ -125,7 +125,7 @@
 					<input type="text" name="usuario" value="<?=$usuario?>" required>
  				</div>
  				<div class="error">
-					<span ><?php echo isset($loginInvalido["usuario"])? $loginInvalido["usuario"]:"";?> </span>
+					<span ><?php echo isset($errores["usuario"])? $errores["usuario"]:"";?> </span>
                 </div>
  
 				<div class="campo">
@@ -133,7 +133,7 @@
 					<input type="password" name="password" value="<?=$password?>" required>
 				</div>				
  				<div class="error">
-					<span ><?php echo isset($loginInvalido["password"])? $loginInvalido["password"]:"";?> </span>
+					<span ><?php echo isset($errores["password"])? $errores["password"]:"";?> </span>
                 </div>
 
  				<div class="campo1">
