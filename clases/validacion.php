@@ -62,7 +62,7 @@ include_once ("autoload.php");
           $errores["password"]= "Por Favor ingresá tu contraseña.";
           $hayError = true; 
       }
-      var_dump($errores); 
+//      var_dump($errores); 
       return $errores;
     }
 
@@ -70,54 +70,10 @@ include_once ("autoload.php");
         $errores = [];
         $userEncontrado=false;
 
-        //OOP lo siguiente debe ir en json, pero todavía no se como hacerlo, lo dejo por acá por ahora... 
-        $json= file_get_contents("usuarios.json");
-        $array= json_decode($json,true);
-        $array = $array["usuarios"];
-//        echo "<br> en validarLoginOK <br>";
-//        var_dump($array);
+        $db = New Json; //AGREGADO PARA MANEJO CON jSON
+        //$db = New Mysql; //AGREGADO PARA MANEJO CON MySQL
+        $errores = $db->esUsuarioValido($usuario); // antes solo guardarUsuario($usuario); 
 
-
-        for ($i=0; $i < count($array); $i++) {
-          
-          $user = json_decode($array[$i],true);
-      
-          if($usuario->getUsername()==$user["usuario"]){
-//          var_dump($datos['usuario'],$user['usuario']);
-/*          echo "<br> User encontrado, valido password"; 
-     echo "<br> validarLoginOK password: <br>";
-var_dump($user["password"]); 
-         echo "<br> validarLoginOK getPassword: <br>";
-var_dump($usuario->getPassword()); 
-         echo "<br> validarLoginOK !PasswordVerify: <br>";
-var_dump(!password_verify($usuario->getPassword(), $user["password"])); */
-            if(!password_verify($usuario->getPassword(), $user["password"]) ){
-//              echo "<br> password incorrecta"; 
-//                    exit; 
-              $errores["password"]= "Contraseña incorrecta, por favor volvé a ingresarla.";
-              return $errores;
-              break;
-
-            } else {
-//              echo "<br> password correcta"; 
-//                      exit; 
-            $userEncontrado=true;
-              //OOP
-              $usuario->setEmail($user["email"]);
-              $usuario->setAvatar($user["avatar"]); 
-              //OOP
-
-              $_SESSION["user"] = $user["usuario"];
-              $_SESSION["avatar"] = $user["avatar"];
-
-            }
-     
-          }
-        }
-
-        if($userEncontrado==false) {
-          $errores["usuario"]= "Usuario incorrecto, por favor volvé a ingresarlo o registrate si aún no lo hiciste.";
-        }
         return $errores;
     }
 

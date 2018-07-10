@@ -30,32 +30,60 @@ class Json extends DB {
 //	file_put_contents(self::ARCHIVO, json_encode($usuarioFinal) . PHP_EOL, FILE_APPEND);
 //	exit; 
 	}
-}
 
-/**
- 
-class Json extends DB
-{
-	
-	function guardarUsuario($usuario){
-		echo "<br> en clase Json INICIO<br>";
-		var_dump($usuario); 
-		 json_encode($array, JSON_FORCE_OBJECT);
-	  $user= json_encode($usuario);
-	  $json= file_get_contents("usuarios.json");
-	  $array= json_decode($json,true);
-	  $array["usuarios"][]= $user;
-		echo "<br> en clase Json array antes de encode<br>";
-		var_dump($array); 
-	  $array= json_encode($array);
-		echo "<br> en clase Json array despues de encode<br>";
-		var_dump($array); 
-	  file_put_contents("usuarios.json",$array);
-	  	echo "<br> en clase Json file_put_contents DONE!<br>";
-		
+	public function esUsuarioValido(Usuario $usuario) {
+
+        $json= file_get_contents("usuarios.json");
+        $array= json_decode($json,true);
+        $array = $array["usuarios"];
+
+        for ($i=0; $i < count($array); $i++) {
+          
+          $user = json_decode($array[$i],true);
+      
+          if($usuario->getUsername()==$user["usuario"]){
+//          var_dump($datos['usuario'],$user['usuario']);
+/*          echo "<br> User encontrado, valido password"; 
+     echo "<br> validarLoginOK password: <br>";
+var_dump($user["password"]); 
+         echo "<br> validarLoginOK getPassword: <br>";
+var_dump($usuario->getPassword()); 
+         echo "<br> validarLoginOK !PasswordVerify: <br>";
+var_dump(!password_verify($usuario->getPassword(), $user["password"])); */
+            if(!password_verify($usuario->getPassword(), $user["password"]) ){
+//              echo "<br> password incorrecta"; 
+//                    exit; 
+              $errores["password"]= "Contraseña incorrecta, por favor volvé a ingresarla.";
+              return $errores;
+              break;
+
+            } else {
+//              echo "<br> password correcta"; 
+//                      exit; 
+            $userEncontrado=true;
+              //OOP
+//como no devuelcvo user no tiene sentido guardarlo              $usuario->setEmail($user["email"]);
+//como no devuelcvo user no tiene sentido guardarlo              $usuario->setAvatar($user["avatar"]); 
+              //OOP
+
+              $_SESSION["user"] = $user["usuario"];
+              $_SESSION["avatar"] = $user["avatar"];
+
+            }
+     
+          }
+        }
+
+        if($userEncontrado==false) {
+          $errores["usuario"]= "Usuario incorrecto, por favor volvé a ingresarlo o registrate si aún no lo hiciste.";
+        }
+        return $errores; 
+
 	}
 
+	public function retornaUsuario(array $datos):Usuario {
 
+
+	}
 }
-*/
 ?>

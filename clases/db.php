@@ -6,9 +6,10 @@
  abstract class DB
 {
 	
-	abstract function guardarusuario(Usuario $usuario) ; 
-/*	datosnuevo
-	retornausuario
-*/	
+	abstract function guardarUsuario(Usuario $usuario) ; 
+/*	datosnuevo*/
+	abstract function esUsuarioValido(Usuario $usuario) ; 
+
+	abstract function retornaUsuario(array $datos):Usuario; 
 }
 ?>

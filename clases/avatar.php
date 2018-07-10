@@ -12,7 +12,7 @@
 	public $archivoFinal; 
 	public $locFinal;
 
- 	function __construct()	{
+ 	public function __construct()	{
  		$original = $_FILES["avatar"];
  		if($original["error"] === UPLOAD_ERR_OK) {
 			$this->nombreViejo = $original["name"];
@@ -23,15 +23,15 @@
 			$this->nomAvatar =  uniqid() . "." . $this->extension;
 			$this->locFinal = $this->archivoFinal .$this->nomDir . $this->nomAvatar;
 			$this->archivoFinal = $this->nomDir . $this->nomAvatar;
-			var_dump($this->nombreNuevo, 'archivoFinal: ' . $this->archivoFinal);
+			//var_dump($this->nombreNuevo, 'archivoFinal: ' . $this->archivoFinal);
 			//exit;
 			move_uploaded_file($this->nombreNuevo, $this->locFinal);
 		}
  		# code...
  	}
 
- 	function getNombre(){
- 		return $this->$archivoFinal; 
+ 	public function getNombre(){
+ 		return $this->archivoFinal; 
  	}
  } 
 ?>
