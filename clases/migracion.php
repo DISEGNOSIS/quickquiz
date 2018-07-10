@@ -5,7 +5,7 @@
             try {
                 $dsn = "mysql:host=localhost";
                 $user = "root";
-                $pass = "";
+                $pass = "root";
                 $db = new PDO($dsn, $user, $pass);
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $sql = "CREATE DATABASE IF NOT EXISTS quickquiz_db";

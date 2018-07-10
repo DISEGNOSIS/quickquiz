@@ -6,7 +6,7 @@ class Mysql extends DB {
   public function __construct() {
     $dsn = "mysql:host=localhost;dbname=quickquiz_db;charset=utf8mb4";
     $usuario = "root";
-    $password = "";
+    $password = "root";
     // Fijarse que en este caso, el constructor está seteando la variable $this->db para usar como base de datos.
     $this->db = new PDO($dsn, $usuario, $password);
   }

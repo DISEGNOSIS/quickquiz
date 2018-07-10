@@ -19,9 +19,9 @@
 			$this->extension = pathinfo($this->nombreViejo, PATHINFO_EXTENSION);
 			$this->nombreNuevo = $original["tmp_name"];
 			$this->archivoFinal = realpath(dirname(__FILE__) . '/../');
-			$this->nomDir = "/avatar/";
+			$this->nomDir = "avatar/";
 			$this->nomAvatar =  uniqid() . "." . $this->extension;
-			$this->locFinal = $this->archivoFinal .$this->nomDir . $this->nomAvatar;
+			$this->locFinal = $this->archivoFinal  . "/" . $this->nomDir . $this->nomAvatar;
 			$this->archivoFinal = $this->nomDir . $this->nomAvatar;
 			//var_dump($this->nombreNuevo, 'archivoFinal: ' . $this->archivoFinal);
 			//exit;
