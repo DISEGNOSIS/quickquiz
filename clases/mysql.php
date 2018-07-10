@@ -35,32 +35,42 @@ class Mysql extends DB {
         $userEncontrado=false;
 
 	    // Query para enviar - Controlar nombre de la tabla que vamos a usar. Campos: respeto nombres en Json de Mariela
-	    $sql = "SELECT * FROM usuarios WHERE username:username";
+	    $sql = "SELECT * FROM usuarios WHERE username=:username";
 	    // Preparamos la query
 	    $query = $this->db->prepare($sql);
 	    // Bindeo según usuario.php de Mariela al 6/07
 	    $username =  $user->getUsername(); 
-var_dump($username); 
+//var_dump($username); 
 	    $query->bindParam(":username",$username);
 	    $query->execute();
-var_dump($query); 
+//var_dump($query); 
 
 	    $row = $query->FetchAll(PDO::FETCH_ASSOC); 
 
-var_dump($row); 
-exit; 
+//var_dump($row); 
+//exit; 
 
 	    if (!empty($row)) {
-	        if(!password_verify($user->getPassword(), $row->password)){
-	              echo "<br> password incorrecta"; 
-	              exit; 
-	              $errores["password"]= "Contraseña incorrecta, por favor volvé a ingresarla.";
-	              return $errores;
-		    } else {
-		            $userEncontrado=true;
-	              	$_SESSION["user"] = $user["usuario"];
-		            $_SESSION["avatar"] = $user["avatar"];
-		    }
+	    	foreach ($row as $key => $value) {
+/*	    		echo '<br>'; 
+	    		foreach ($value as $clave => $valuor) {
+	    			echo $clave. " = " . $value[$clave].'<br>';
+		
+	    		}
+	    		exit; */
+		        if(!password_verify($user->getPassword(), $value["password"])){
+//		              echo "<br> password incorrecta"; 
+//		              exit; 
+		              $errores["password"]= "Contraseña incorrecta, por favor volvé a ingresarla.";
+		              return $errores;
+			    } else {
+			            $userEncontrado=true;
+//		              echo "<br> password CORRECTA!"; 
+//		              exit; 
+		              	$_SESSION["user"] = $value["username"];
+			            $_SESSION["avatar"] = $value["avatar"];
+			    }
+	    	}
 		} 
 	    if($userEncontrado==false) {
 	        $errores["usuario"]= "Usuario incorrecto, por favor volvé a ingresarlo o registrate si aún no lo hiciste.";
