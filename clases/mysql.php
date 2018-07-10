@@ -11,19 +11,96 @@ class Mysql extends DB {
     $this->db = new PDO($dsn, $usuario, $password);
   }
   // Llamo a la función que está en Mariela usa sin public y Sin (Usuario $username) usa ($username). Revisar setPassword y setEmail que Mariela no usó en el constructor de usuario.
+
     public function guardarUsuario(Usuario $user) {
     
-    // Query para enviar - Controlar nombre de la tabla que vamos a usar. Campos: respeto nombres en Json de Mariela
-    $sql = "INSERT INTO usuarios (username, email, password, avatar) VALUES (:username, :email, :password, :avatar)";
-    // Preparamos la query
-    $query = $this->db->prepare($sql);
-    // Bindeo según usuario.php de Mariela al 6/07
-    
-    $query->bindParam(":username", $user->getUsername());
-    $query->bindParam(":email", $user->getEmail());
-    $query->bindParam(":password", $user->getPassword());
-    $query->bindParam(":avatar", $user->getAvatar());
-    $query->execute();
-  }
+	    // Query para enviar - Controlar nombre de la tabla que vamos a usar. Campos: respeto nombres en Json de Mariela
+	    $sql = "INSERT INTO usuarios (username, email, password, avatar) VALUES (:username, :email, :password, :avatar)";
+	    // Preparamos la query
+	    $query = $this->db->prepare($sql);
+	    // Bindeo según usuario.php de Mariela al 6/07
+	    
+	    $query->bindParam(":username", $user->getUsername());
+	    $query->bindParam(":email", $user->getEmail());
+	    $query->bindParam(":password", $user->getPassword());
+	    $query->bindParam(":avatar", $user->getAvatar());
+	    $query->execute();
+  	}
+
+	public function retornaUsuario(array $datos):Usuario {
+	}
+
+	public function esUsuarioValido(Usuario $user) {
+
+        $userEncontrado=false;
+
+	    // Query para enviar - Controlar nombre de la tabla que vamos a usar. Campos: respeto nombres en Json de Mariela
+	    $sql = "SELECT * FROM usuarios WHERE username:username";
+	    // Preparamos la query
+	    $query = $this->db->prepare($sql);
+	    // Bindeo según usuario.php de Mariela al 6/07
+	    $username =  $user->getUsername(); 
+var_dump($username); 
+	    $query->bindParam(":username",$username);
+	    $query->execute();
+var_dump($query); 
+
+	    $row = $query->FetchAll(PDO::FETCH_ASSOC); 
+
+var_dump($row); 
+exit; 
+
+	    if (!empty($row)) {
+	        if(!password_verify($user->getPassword(), $row->password)){
+	              echo "<br> password incorrecta"; 
+	              exit; 
+	              $errores["password"]= "Contraseña incorrecta, por favor volvé a ingresarla.";
+	              return $errores;
+		    } else {
+		            $userEncontrado=true;
+	              	$_SESSION["user"] = $user["usuario"];
+		            $_SESSION["avatar"] = $user["avatar"];
+		    }
+		} 
+	    if($userEncontrado==false) {
+	        $errores["usuario"]= "Usuario incorrecto, por favor volvé a ingresarlo o registrate si aún no lo hiciste.";
+	    }
+	    return $errores; 
+	}
+/*
+            if(!password_verify($usuario->getPassword(), $user["password"]) ){
+//              echo "<br> password incorrecta"; 
+//                    exit; 
+              $errores["password"]= "Contraseña incorrecta, por favor volvé a ingresarla.";
+              return $errores;
+              break;
+
+            } else {
+//              echo "<br> password correcta"; 
+//                      exit; 
+            $userEncontrado=true;
+              //OOP
+//como no devuelcvo user no tiene sentido guardarlo              $usuario->setEmail($user["email"]);
+//como no devuelcvo user no tiene sentido guardarlo              $usuario->setAvatar($user["avatar"]); 
+              //OOP
+
+              $_SESSION["user"] = $user["usuario"];
+              $_SESSION["avatar"] = $user["avatar"];
+
+            }
+     
+          }
+        }
+
+//var_dump($userEncontrado); 
+
+        if($userEncontrado==false) {
+
+          $errores["usuario"]= "Usuario incorrecto, por favor volvé a ingresarlo o registrate si aún no lo hiciste.";
+        }
+        return $errores; 
+
+	}*/
+
 }
  ?>
