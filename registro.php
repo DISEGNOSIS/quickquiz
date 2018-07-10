@@ -27,11 +27,12 @@
 		if(empty($errores)){
 			$usuario = New Usuario($_POST['usuario'], $_POST['email_confirm'], '', $_POST['avatar']);
 			$usuario->setPassword($_POST['password']); 
-			$json = New Json; //AGREGADO PARA MANEJO CON jSON
-
+			$db = New Json; //AGREGADO PARA MANEJO CON jSON
+			//$db = New Mysql; //AGREGADO PARA MANEJO CON MySQL
+			
 //	echo "<br> usuario en registro php: <br>"; 
 //	var_dump($usuario);
-			$json->guardarUsuario($usuario); // antes solo guardarUsuario($usuario); 
+			$db->guardarUsuario($usuario); // antes solo guardarUsuario($usuario); 
 			$session->login($usuario); //agregado para OOP
 			//$_SESSION["user"] = $_POST["usuario"]; eliminado para OOP
           	//$_SESSION["avatar"] = $_POST["avatar"]; eliminado para OOP
