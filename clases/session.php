@@ -11,12 +11,12 @@ class Session
 	}
 
 	public function login(Usuario $usuario){
-		echo "<br> LOGIN <br>"; 
-		$_SESSION["user"] = $usuario->getUserName();
-		$this->usuario = $usuario->getUserName();
-		echo "<br> usuario <br>";
+		//echo "<br> LOGIN <br>"; 
+		$_SESSION["user"] = $usuario->getUsername();
+		$this->usuario = $usuario->getUsername();
+		//echo "<br> usuario <br>";
 //var_dump($usuario); 
-		$_SESSION["avatar"] = $usuario->getAvatar(); 
+		$_SESSION["avatar"] = $usuario->getAvatar();
 //echo "<br> LOGUEADO.., supuestamente con session <br>";
 //	var_dump($_SESSION); 
 	}

@@ -49,7 +49,7 @@
 		<nav class="top">
 			<ul>
 			<li><a href="jugar.php">JUGÁ</a></li>
-			 <li><a href="<?php echo $php2?>"><?php echo $etiqueta2?></a></li>
+			 <li class="activo"><a href="<?php echo $php2?>"><?php echo $etiqueta2?></a></li>
 			 <li><a href="<?php echo $php3?>"><?php echo $etiqueta3?></a></li>
 			</ul>
 		</nav>
@@ -61,7 +61,7 @@
 	 </a>
 	 <nav class="main-nav">
 		 <ul>
-		 	<li class="activo"><a href="index.php">Inicio</a></li>
+		 	<li><a href="index.php">Inicio</a></li>
 			 <li><a href="como-jugar.php">¿Cómo se juega?</a></li>
 			 <li><a href="reglas.php">Reglas</li>
 			 <li><a href="ayuda.php">Ayuda</a></li>

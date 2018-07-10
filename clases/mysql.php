@@ -20,10 +20,10 @@ class Mysql extends DB {
 	    $query = $this->db->prepare($sql);
 	    // Bindeo según usuario.php de Mariela al 6/07
 	    
-	    $query->bindParam(":username", $user->getUsername());
-	    $query->bindParam(":email", $user->getEmail());
-	    $query->bindParam(":password", $user->getPassword());
-	    $query->bindParam(":avatar", $user->getAvatar());
+	    $query->bindValue(":username", $user->getUsername());
+	    $query->bindValue(":email", $user->getEmail());
+	    $query->bindValue(":password", $user->getPassword());
+	    $query->bindValue(":avatar", $user->getAvatar());
 	    $query->execute();
   	}
 
@@ -35,7 +35,7 @@ class Mysql extends DB {
         $userEncontrado=false;
 
 	    // Query para enviar - Controlar nombre de la tabla que vamos a usar. Campos: respeto nombres en Json de Mariela
-	    $sql = "SELECT * FROM usuarios WHERE username=:username";
+	    /* $sql = "SELECT * FROM usuarios WHERE username=:username";
 	    // Preparamos la query
 	    $query = $this->db->prepare($sql);
 	    // Bindeo según usuario.php de Mariela al 6/07
@@ -45,33 +45,33 @@ class Mysql extends DB {
 	    $query->execute();
 //var_dump($query); 
 
-	    $row = $query->FetchAll(PDO::FETCH_ASSOC); 
+	    $row = $query->FetchAll(PDO::FETCH_ASSOC);  */
 
 //var_dump($row); 
 //exit; 
-
-	    if (!empty($row)) {
-	    	foreach ($row as $key => $value) {
+		$errores = [];
+	   /*  if (!empty($row)) {
+	    	foreach ($row as $key => $value) { */
 /*	    		echo '<br>'; 
 	    		foreach ($value as $clave => $valuor) {
 	    			echo $clave. " = " . $value[$clave].'<br>';
 		
 	    		}
-	    		exit; */
-		        if(!password_verify($user->getPassword(), $value["password"])){
+				exit; */
+		        if(!password_verify($_POST['password'], $user->getPassword())){
 //		              echo "<br> password incorrecta"; 
 //		              exit; 
 		              $errores["password"]= "Contraseña incorrecta, por favor volvé a ingresarla.";
 		              return $errores;
 			    } else {
-			            $userEncontrado=true;
+						$userEncontrado=true;
 //		              echo "<br> password CORRECTA!"; 
 //		              exit; 
-		              	$_SESSION["user"] = $value["username"];
-			            $_SESSION["avatar"] = $value["avatar"];
+		              	/* $_SESSION["user"] = $user->getUsername();
+						$_SESSION["avatar"] = $user->getAvatar(); */
 			    }
-	    	}
-		} 
+	   /*  	}
+		} */ 
 	    if($userEncontrado==false) {
 	        $errores["usuario"]= "Usuario incorrecto, por favor volvé a ingresarlo o registrate si aún no lo hiciste.";
 	    }
@@ -112,5 +112,37 @@ class Mysql extends DB {
 
 	}*/
 
+	public function existeUsuarioR(Usuario $usuario) {
+		$existeUsuario=[];
+		$sql = "SELECT * FROM usuarios WHERE username = :username";
+		$query = $this->db->prepare($sql);
+		$query->bindValue(":username", $usuario->getUsername());
+		$query->execute();
+		$usuarioTraido = $query->fetch(PDO::FETCH_ASSOC);
+		if($usuarioTraido != false) {
+			foreach($usuarioTraido as $value){
+				if($value==$usuario->getUsername()) {
+					$existeUsuario["usuario"] = "Ya está registrado ese Usuario por favor elegí otro";
+				}
+				if($value==$usuario->getEmail()) {
+					$existeUsuario["email"] = "Ya está registrado ese e-Mail por favor elegí otro";
+				}
+			}
+		}
+		return $existeUsuario;
+	}
+
+	public function existeUsuarioL() {
+		$sql = "SELECT * FROM usuarios WHERE username = :username";
+		$query = $this->db->prepare($sql);
+		$query->bindValue(":username", $_POST["usuario"]);
+		$query->execute();
+		$usuario = $query->fetch(PDO::FETCH_ASSOC);
+		return $usuario;
+	}
+
+	public function getConexion() {
+		return $this->db;
+	}
 }
  ?>

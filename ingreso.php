@@ -47,24 +47,31 @@
 //			var_dump($loginInvalido);
 
 			//OOP if (empty($loginInvalido)) {
-			$usuarioIngreso = New Usuario($_POST['usuario'],'', $_POST['password'], '');
-//		    echo "<br> usuario ingreso en ingreso.php <br>";
-//			var_dump($usuarioIngreso);  
-			$errores=Validacion::validarLoginOK($usuarioIngreso); 
-			if(empty($errores)){
-			/*echo "<br> DESPUES de validar login";*/
-				//session_start(); 
-				if(isset($_POST['recordarme'])) {
-					$cookie_name = "userQQ"; 
-					$cookie_value = $usuarioIngreso->getUsername;
-					setcookie($cookie_name, $cookie_value, time()+2592000);
-					setcookie("avatar", $_SESSION["avatar"], time()+2592000);
-				}
-//				echo "va a hacer login";
-				$session->login($usuarioIngreso); 
-				header("Location: index.php");
+			$usuarioTraido = $db->existeUsuarioL();
+			if($usuarioTraido != false) {
+				$username = $usuarioTraido["username"];
+				$email = $usuarioTraido["email"];
+				$password = $usuarioTraido["password"];
+				$avatar = $usuarioTraido["avatar"];
+				$usuarioIngreso = new Usuario($username, $email, $password, $avatar);
+	//		    echo "<br> usuario ingreso en ingreso.php <br>";  
+				$errores=Validacion::validarLoginOK($usuarioIngreso, $db);
+				//var_dump($usuarioTraido, $errores);exit;
+				if(empty($errores)){
+				/*echo "<br> DESPUES de validar login";*/
+					//session_start(); 
+					if(isset($_POST['recordarme'])) {
+						$cookie_name = "userQQ"; 
+						$cookie_value = $usuarioIngreso->getUsername();
+						setcookie($cookie_name, $cookie_value, time()+2592000);
+						setcookie("avatar", $_SESSION["avatar"], time()+2592000);
+					}
+	//				echo "va a hacer login";
+					$session->login($usuarioIngreso); 
+					header("Location: bienvenida.php");
 
-				//OOP temporal header('Location: bienvenida.php');
+					//OOP temporal header('Location: bienvenida.php');
+				}
 			}
 		}
 

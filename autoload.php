@@ -5,4 +5,12 @@ spl_autoload_register(function ($clase) {
     include 'clases/' . $clase . '.php';
 });
 
+$GLOBALS["mensaje"] = "";
+
+try {
+    $db = new Mysql();
+} catch(PDOException $e) {
+    $GLOBALS["mensaje"] =  $e->getMessage();
+}
+
 ?>

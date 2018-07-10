@@ -428,7 +428,7 @@ footer {
 	border: 1px solid #8cc63f;
 }
 
-.formulario #registro button {
+.formulario #registro button, .formulario #migracion button {
 	color: #fff;
 	background: #662d91;
 	text-shadow: 1px 1px 2px #000;
@@ -436,7 +436,7 @@ footer {
 	margin-top: 22px;
 }
 
-.formulario #registro button:hover {
+.formulario #registro button:hover, .formulario #migracion button:hover {
 	color: #222;
 	background: #93278f;
 	text-shadow: 1px 1px 2px #fff;
@@ -679,8 +679,16 @@ footer {
 
 @media only screen and (max-width: 322px) {
 	
+	h1 {
+		text-align: left;
+	}
+
 	.top li {
- 		font-size: 0.9em;
+		font-size: 0.9em;
+   	}
+
+	.campo {
+		width: 72%;
 	}
 
 	.campo p {

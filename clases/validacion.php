@@ -66,11 +66,12 @@ include_once ("autoload.php");
       return $errores;
     }
 
-    public static function validarLoginOK(usuario $usuario){
+    public static function validarLoginOK(usuario $usuario, $db){
         $errores = [];
 
 //        $db = New Json; //AGREGADO PARA MANEJO CON jSON
-        $db = New Mysql; //AGREGADO PARA MANEJO CON MySQL
+        // Lo instancié en autoload.php así queda disponible para todas las páginas
+        //$db = New Mysql; //AGREGADO PARA MANEJO CON MySQL
         $errores = $db->esUsuarioValido($usuario); // antes solo guardarUsuario($usuario); 
 
         return $errores;

@@ -9,8 +9,8 @@ include_once ("autoload.php");
 
 		public function __construct($username, $email, $password, $avatar){
 			$this->username = $username; 
-			$this->email = $email; 
-			$this->password = $password; 
+			$this->email = $email;
+			$this->setPassword($password); 
 			$this->avatar = $avatar; 
 		}
 
@@ -40,7 +40,11 @@ include_once ("autoload.php");
 			$this->email = $email; 
 		}
 		public function setPassword($password){
-			$this->hashPassword($password); 
+			if(substr($password, 0, 6) != "$2y$10") {
+                $this->hashPassword($password);
+            } else {
+                $this->password = $password;
+            }
 		}
 		public function setAvatar($avatar){
 			$this->avatar = $avatar; 
